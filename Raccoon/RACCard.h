@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Card : NSObject
+@interface RACCard : NSObject
 
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *title;

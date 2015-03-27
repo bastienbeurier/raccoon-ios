@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Card.h"
+#import "RACCard.h"
 
 @interface RACCardView : UIView
+
+- (id)initWithCard:(RACCard *)card andFrame:(CGRect)frame;
 
 @end

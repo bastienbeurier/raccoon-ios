@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raccoon. All rights reserved.
 //
 
-#import "Card.h"
+#import "RACCard.h"
 
-@implementation Card
+@implementation RACCard
 
 @end
