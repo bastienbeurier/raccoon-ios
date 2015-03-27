@@ -43,11 +43,17 @@
 // ----------------------------------------------------------
 
 - (void)initImageView {
-
+    float size = MIN(self.frame.size.width, self.frame.size.height);
+    CGRect frame = CGRectMake(0, 0, size, size);
+    self.imageView = [[UIImageView alloc] initWithFrame:frame];
+    [self addSubview:self.imageView];
 }
 
 - (void)initOverlayView {
-    
+    float size = self.imageView.frame.size.height;
+    CGRect frame = CGRectMake(0, 0, size, size);
+    self.overlayView = [[UIView alloc] initWithFrame:frame];
+    [self addSubview:self.overlayView];
 }
 
 - (void)initTitleView {

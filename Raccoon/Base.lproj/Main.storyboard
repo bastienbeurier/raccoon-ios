@@ -16,12 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2QH-r0-8mj">
-                                <rect key="frame" x="21" y="20" width="563" height="560"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2QH-r0-8mj">
+                                <rect key="frame" x="20" y="80" width="560" height="320"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2QH-r0-8mj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="BcH-Jv-CFL"/>
+                            <constraint firstAttribute="trailing" secondItem="2QH-r0-8mj" secondAttribute="trailing" constant="20" id="LWR-y4-BTP"/>
+                            <constraint firstItem="2QH-r0-8mj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="akr-3t-lq5"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2QH-r0-8mj" secondAttribute="bottom" constant="200" id="lg9-Pr-5ZM"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="cardsContainer" destination="2QH-r0-8mj" id="v0t-aj-sFW"/>
