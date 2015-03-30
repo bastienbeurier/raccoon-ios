@@ -15,11 +15,10 @@
 
 @interface RACCardView ()
 
-//Underlying model.
+//Card object.
 @property (strong, nonatomic) RACCard *card;
 
 //Subviews.
-
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
@@ -28,27 +27,31 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondInfoView;
 @property (weak, nonatomic) IBOutlet UILabel *thirdInfoView;
 
-
 @end
 
 
 @implementation RACCardView
 
+// ----------------------------------------------------------
+#pragma mark Overrides
+// ----------------------------------------------------------
+
 - (id)initWithCard:(RACCard *)card andFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (self) {
+        self.card = card;
+        
+        //Init view from nib file.
         [[NSBundle mainBundle] loadNibNamed:@"RACCardView" owner:self options:nil];
         self.view.frame = self.bounds;
         [self addSubview:self.view];
         
+        //Add borders and round corners to the view.
         self.layer.cornerRadius = 5.0;
         self.clipsToBounds = YES;
-        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        self.layer.borderWidth = 0.5;
         
-        self.card = card;
-        
+        //Fill card information.
         [self loadImage];
         [self showOverlayGradient];
         [self setLabels];
@@ -65,16 +68,17 @@
 }
 
 // ----------------------------------------------------------
-#pragma mark Subviews initialization
+#pragma mark Other methods
 // ----------------------------------------------------------
 
 - (void)loadImage {
-    //TODO BB: loading sign while image is loading.
+    //TODO BB: add spinner and placeholder while image is loading.
     
     [self.imageView setImageWithURL:[NSURL URLWithString:self.card.imageUrl]];
 }
 
 - (void)showOverlayGradient {
+    //Vertical black to clear gradient.
     CAGradientLayer *topGradient = [CAGradientLayer layer];
     CGRect gradientFrame = CGRectMake(0, 0, self.overlayView.frame.size.width, OVERLAY_GRADIENT_HEIGHT);
     topGradient.frame = gradientFrame;
