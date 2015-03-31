@@ -113,6 +113,13 @@
     [self.cardsContainer insertSubview:self.backCardContainer belowSubview:self.frontCardContainer];
 }
 
+- (void)bringBackCardToFrontAndCreateNewBackCard {
+    self.frontCardContainer = self.backCardContainer;
+    self.frontCardView = self.backCardView;
+    
+    [self createBackCardView];
+}
+
 - (void)cardMoved {
     
 }
@@ -134,25 +141,50 @@
 }
 
 - (void)cardPanned:(UIPanGestureRecognizer *)recognizer {
+    //Touch current position.
+    CGPoint touchLocation = [recognizer locationInView:self.view];
+    
+    //Compute touch offset.
+    float touchPositionOffset = self.cardPanInitialX - touchLocation.x;
+    
     if (recognizer.state == UIGestureRecognizerStateEnded ||
         recognizer.state == UIGestureRecognizerStateCancelled ||
         recognizer.state == UIGestureRecognizerStateFailed) {
         
-        [UIView animateWithDuration:0.3 animations:^{
-            //Bring back card to initial position.
-            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX, self.frontCardContainer.center.y);
-            self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
-        }];
+        if (ABS(touchPositionOffset) > self.cardsContainer.frame.size.width / 2) {
+            [UIView animateWithDuration:0.2 animations:^{
+                float offScreenPosition = self.view.bounds.size.width + self.frontCardContainer.bounds.size.width;
+                
+                //Move card out of screen.
+                if (touchPositionOffset > 0) {
+                    self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX - offScreenPosition, self.frontCardContainer.center.y);
+                } else {
+                    self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX + offScreenPosition, self.frontCardContainer.center.y);
+                }
+                
+                //Apply rotation.
+                self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(15));
+            } completion:^(BOOL finished) {
+                //Dismiss card
+                [self.frontCardContainer removeFromSuperview];
+                [self.frontCardView removeFromSuperview];
+                
+                //Update front and back cards
+                [self bringBackCardToFrontAndCreateNewBackCard];
+            }];
+        } else {
+            [UIView animateWithDuration:0.3 animations:^{
+                //Bring back card to initial position.
+                self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX, self.frontCardContainer.center.y);
+                self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+            }];
+        }
     } else {
-        //Touch current position.
-        CGPoint touchLocation = [recognizer locationInView:self.view];
+        
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             //Store touch initial position.
             self.cardPanInitialX = touchLocation.x;
         } else {
-            //Compute touch offset.
-            float touchPositionOffset = self.cardPanInitialX - touchLocation.x;
-            
             //Move card according to touch offset.
             self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX - touchPositionOffset, self.frontCardContainer.center.y);
             
