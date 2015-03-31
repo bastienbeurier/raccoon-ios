@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *ingredients;
 @property (nonatomic) NSInteger healthScore;
 @property (nonatomic) NSInteger duration;
 @property (nonatomic) NSInteger price;

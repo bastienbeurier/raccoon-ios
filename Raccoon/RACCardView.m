@@ -10,8 +10,6 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <QuartzCore/QuartzCore.h>
 
-#define OVERLAY_GRADIENT_HEIGHT 70.0
-#define TITLE_LABEL_HEIGHT 40.0
 #define CORNER_RADIUS 5.0
 #define BORDER_WIDTH 0.5
 
@@ -28,6 +26,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstInfoView;
 @property (weak, nonatomic) IBOutlet UILabel *secondInfoView;
 @property (weak, nonatomic) IBOutlet UILabel *thirdInfoView;
+@property (weak, nonatomic) IBOutlet UILabel *firstInfoTitle;
+@property (weak, nonatomic) IBOutlet UILabel *secondInfoTitle;
+@property (weak, nonatomic) IBOutlet UILabel *thirdInfoTitle;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientsView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingSpinner;
+@property (weak, nonatomic) IBOutlet UIView *titleBackgroundView;
 
 @end
 
@@ -38,7 +42,7 @@
 #pragma mark Overrides
 // ----------------------------------------------------------
 
-- (id)initWithCard:(RACCard *)card andFrame:(CGRect)frame {
+- (instancetype)initWithCard:(RACCard *)card andFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (self) {
@@ -55,10 +59,12 @@
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.layer.borderWidth = BORDER_WIDTH;
         
+        //Set gradient.
+        [self setTitleBackgroundGradient];
+        
         //Fill card information.
         [self loadImage];
-        [self showOverlayGradient];
-        [self setLabels];
+        [self setInfoLabels];
     }
     
     return self;
@@ -76,27 +82,46 @@
 // ----------------------------------------------------------
 
 - (void)loadImage {
-    //TODO BB: add spinner and placeholder while image is loading.
+    self.titleBackgroundView.hidden = YES;
+    [self.imageLoadingSpinner startAnimating];
     
-    [self.imageView setImageWithURL:[NSURL URLWithString:self.card.imageUrl]];
+    //Load image.
+    [self.imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.card.imageUrl]]
+                          placeholderImage:nil
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       [self.imageLoadingSpinner stopAnimating];
+                                       self.imageLoadingSpinner.hidden = YES;
+                                       self.imageView.image = image;
+                                       self.titleBackgroundView.hidden = NO;
+                                       [self setOverlayLabels];
+                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *errir) {
+                                       //
+                                   }];
 }
 
-- (void)showOverlayGradient {
+- (void)setTitleBackgroundGradient {
     //Vertical black to clear gradient.
-    CAGradientLayer *topGradient = [CAGradientLayer layer];
-    CGRect gradientFrame = CGRectMake(0, 0, self.overlayView.frame.size.width, OVERLAY_GRADIENT_HEIGHT);
-    topGradient.frame = gradientFrame;
-    UIColor *startColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-    UIColor *endColor = [UIColor clearColor];
-    topGradient.colors = [NSArray arrayWithObjects:(id)[startColor CGColor], (id)[endColor CGColor], nil];
-    [self.overlayView.layer insertSublayer:topGradient atIndex:0];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    CGRect gradientFrame = self.titleBackgroundView.bounds;
+    gradient.frame = gradientFrame;
+    UIColor *startColor = [UIColor clearColor];
+    UIColor *endColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+    gradient.colors = [NSArray arrayWithObjects:(id)[startColor CGColor], (id)[endColor CGColor], nil];
+    [self.titleBackgroundView.layer insertSublayer:gradient atIndex:0];
 }
 
-- (void)setLabels {
+- (void)setOverlayLabels {
     self.titleView.text = self.card.title;
+    self.ingredientsView.text = self.card.ingredients;
+}
+
+- (void)setInfoLabels {
+    self.firstInfoTitle.text = [NSLocalizedString(@"healthy", nil) uppercaseString];
+    self.secondInfoTitle.text = [NSLocalizedString(@"time", nil) uppercaseString];
+    self.thirdInfoTitle.text = [NSLocalizedString(@"price", nil) uppercaseString];
     
     self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.card.healthScore];
-    self.secondInfoView.text = [NSString stringWithFormat:@"%ld%@", self.card.duration, NSLocalizedString(@"mins", nil)];
+    self.secondInfoView.text = [NSString stringWithFormat:@"%ld %@", self.card.duration, NSLocalizedString(@"min", nil)];
     
     NSString *priceStr = @"";
     

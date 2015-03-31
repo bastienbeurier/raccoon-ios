@@ -10,4 +10,16 @@
 
 @implementation RACCard
 
+- (instancetype)init {
+    self = [super init];
+    
+    if (self) {
+        self.imageUrl = nil;
+        self.title = @"";
+        self.ingredients = @"";
+    }
+    
+    return self;
+}
+
 @end

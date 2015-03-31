@@ -81,8 +81,9 @@
     //TODO BB: remove, just for testing
     RACCard *card = [[RACCard alloc] init];
     
-    card.imageUrl = @"http://www.kimshealthyeats.com/wp-content/uploads/2013/05/tomato-mozzarella-skewers-02.jpg";
+    card.imageUrl = @"http://afoodcentriclife.com/wp-content/uploads/2014/06/Waimea-Salad1.jpg";
     card.title = @"Tomato Mozzarella Sticks";
+    card.ingredients = @"tomato, mozzarella, basil, balsamic vinegar, olive oil";
     card.healthScore = 87;
     card.duration = 5;
     card.price = 0;
@@ -102,6 +103,7 @@
     
     card.imageUrl = @"http://afoodcentriclife.com/wp-content/uploads/2014/06/Waimea-Salad1.jpg";
     card.title = @"Hawaiian Salad";
+    card.ingredients = @"salad, tomato, feta cheese, apricot";
     card.healthScore = 76;
     card.duration = 10;
     card.price = 0;
@@ -147,10 +149,12 @@
     //Compute touch offset.
     float touchPositionOffset = self.cardPanInitialX - touchLocation.x;
     
+    //Card is dropped.
     if (recognizer.state == UIGestureRecognizerStateEnded ||
         recognizer.state == UIGestureRecognizerStateCancelled ||
         recognizer.state == UIGestureRecognizerStateFailed) {
         
+        //Card is panned enough to be dismissed.
         if (ABS(touchPositionOffset) > self.cardsContainer.frame.size.width / 2) {
             [UIView animateWithDuration:0.2 animations:^{
                 float offScreenPosition = self.view.bounds.size.width + self.frontCardContainer.bounds.size.width;
@@ -172,6 +176,7 @@
                 //Update front and back cards
                 [self bringBackCardToFrontAndCreateNewBackCard];
             }];
+        //Card is not panned enough to be dismissed.
         } else {
             [UIView animateWithDuration:0.3 animations:^{
                 //Bring back card to initial position.
@@ -179,8 +184,8 @@
                 self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
             }];
         }
+    //Card is panned.
     } else {
-        
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             //Store touch initial position.
             self.cardPanInitialX = touchLocation.x;
