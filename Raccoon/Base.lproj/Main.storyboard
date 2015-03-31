@@ -16,22 +16,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2QH-r0-8mj">
-                                <rect key="frame" x="20" y="80" width="560" height="320"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zgv-5q-8qh">
+                                <rect key="frame" x="20" y="465" width="560" height="25"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4vR-SV-wLn">
+                                <rect key="frame" x="15" y="465" width="570" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="nuV-uH-WYf"/>
+                                    <constraint firstAttribute="height" constant="20" id="p0F-pS-Mjq"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="nuV-uH-WYf"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2QH-r0-8mj">
+                                <rect key="frame" x="10" y="80" width="580" height="400"/>
                                 <gestureRecognizers/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="trailing" secondItem="2QH-r0-8mj" secondAttribute="trailing" constant="-5" id="8A1-As-TRg"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="leading" secondItem="zgv-5q-8qh" secondAttribute="leading" constant="-5" id="9WC-tK-hEO"/>
                             <constraint firstItem="2QH-r0-8mj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="BcH-Jv-CFL"/>
-                            <constraint firstAttribute="trailing" secondItem="2QH-r0-8mj" secondAttribute="trailing" constant="20" id="LWR-y4-BTP"/>
-                            <constraint firstItem="2QH-r0-8mj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="akr-3t-lq5"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2QH-r0-8mj" secondAttribute="bottom" constant="200" id="lg9-Pr-5ZM"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="bottom" secondItem="2QH-r0-8mj" secondAttribute="bottom" id="IYo-hs-3g7"/>
+                            <constraint firstAttribute="trailing" secondItem="2QH-r0-8mj" secondAttribute="trailing" constant="10" id="LWR-y4-BTP"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="leading" secondItem="2QH-r0-8mj" secondAttribute="leading" constant="5" id="MKq-ZO-pIC"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="trailing" secondItem="zgv-5q-8qh" secondAttribute="trailing" constant="5" id="MyK-Ab-4JR"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="bottom" secondItem="2QH-r0-8mj" secondAttribute="bottom" constant="5" id="PhT-3f-JFy"/>
+                            <constraint firstItem="2QH-r0-8mj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="akr-3t-lq5"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="top" secondItem="zgv-5q-8qh" secondAttribute="top" id="hNG-ld-Ge1"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="centerX" secondItem="2QH-r0-8mj" secondAttribute="centerX" id="ilF-yz-NrT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2QH-r0-8mj" secondAttribute="bottom" constant="120" id="lg9-Pr-5ZM"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="bottom" secondItem="zgv-5q-8qh" secondAttribute="bottom" constant="-5" id="wTM-cw-BYy"/>
+                            <constraint firstItem="4vR-SV-wLn" firstAttribute="centerX" secondItem="zgv-5q-8qh" secondAttribute="centerX" id="zIV-Px-AkW"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="IYo-hs-3g7"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="cardsContainer" destination="2QH-r0-8mj" id="v0t-aj-sFW"/>
+                        <outlet property="cardsContainer" destination="2QH-r0-8mj" id="ZFv-l4-6mA"/>
+                        <outlet property="firstDecorationCard" destination="4vR-SV-wLn" id="rL9-MZ-45b"/>
+                        <outlet property="secondDecorationCard" destination="zgv-5q-8qh" id="uap-Fq-UTj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

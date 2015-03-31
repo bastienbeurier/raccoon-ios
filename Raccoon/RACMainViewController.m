@@ -13,13 +13,20 @@
 #define CARDS_LOADING_BATCH 10
 #define   DEGREES_TO_RADIANS(degrees)  ((3.1416 * degrees)/ 180)
 
+#define DECORATION_CARD_CORNER_RADIUS 5.0
+#define DECORATION_CARD_BORDER_WIDTH 0.5
+
 @interface RACMainViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *cardsContainer;
+@property (weak, nonatomic) IBOutlet UIView *firstDecorationCard;
+@property (weak, nonatomic) IBOutlet UIView *secondDecorationCard;
 
-@property (strong, nonatomic) RACCardView *topCardView;
+@property (strong, nonatomic) UIView *frontCardContainer;
+@property (strong, nonatomic) RACCardView *frontCardView;
 
-@property (strong, nonatomic) RACCardView *bottomCardView;
+@property (strong, nonatomic) UIView *backCardContainer;
+@property (strong, nonatomic) RACCardView *backCardView;
 
 @property (strong, nonatomic) NSMutableArray *cardsQueue;
 
@@ -34,10 +41,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Init the queue of loaded cards.
     self.cardsQueue = [[NSMutableArray alloc] initWithCapacity:CARDS_LOADING_BATCH];
     
+    //Set card pan gesture recognizer.
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cardPanned:)];
     [self.cardsContainer addGestureRecognizer:panGestureRecognizer];
+    
+    //Set first decoration card border.
+    self.firstDecorationCard.layer.cornerRadius = DECORATION_CARD_CORNER_RADIUS;
+    self.firstDecorationCard.layer.borderWidth = DECORATION_CARD_BORDER_WIDTH;
+    self.firstDecorationCard.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
+    //Set second decoration card border.
+    self.secondDecorationCard.layer.cornerRadius = DECORATION_CARD_CORNER_RADIUS;
+    self.secondDecorationCard.layer.borderWidth = DECORATION_CARD_BORDER_WIDTH;
+    self.secondDecorationCard.layer.borderColor = [UIColor lightGrayColor].CGColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -47,6 +66,18 @@
 }
 
 - (void)loadCards {
+    //BB TODO: load cards and add them to queue.
+    
+    [self createFrontCardView];
+    [self createBackCardView];
+    [self preloadImages];
+}
+
+- (void)preloadImages {
+    
+}
+
+- (void)createFrontCardView {
     //TODO BB: remove, just for testing
     RACCard *card = [[RACCard alloc] init];
     
@@ -56,22 +87,30 @@
     card.duration = 5;
     card.price = 0;
     
-    [self.cardsQueue addObject:card];
+    self.frontCardContainer = [[UIView alloc] initWithFrame:self.cardsContainer.bounds];
+    self.frontCardView = [[RACCardView alloc] initWithCard:card andFrame:self.cardsContainer.bounds];
     
-    [self createCardView];
-    [self preloadImages];
+    [self.frontCardContainer addSubview:self.frontCardView];
+    [self.cardsContainer addSubview:self.frontCardContainer];
+    
+    self.cardCenterInitialX = self.frontCardContainer.center.x;
 }
 
-- (void)preloadImages {
+- (void)createBackCardView {
+    //TODO BB: remove, just for testing
+    RACCard *card = [[RACCard alloc] init];
     
-}
-
-- (void)createCardView {
-    self.topCardView = [[RACCardView alloc] initWithCard:[self.cardsQueue objectAtIndex:0] andFrame:self.cardsContainer.bounds];
+    card.imageUrl = @"http://afoodcentriclife.com/wp-content/uploads/2014/06/Waimea-Salad1.jpg";
+    card.title = @"Hawaiian Salad";
+    card.healthScore = 76;
+    card.duration = 10;
+    card.price = 0;
     
-    [self.cardsContainer addSubview:self.topCardView];
+    self.backCardContainer = [[UIView alloc] initWithFrame:self.cardsContainer.bounds];
+    self.backCardView = [[RACCardView alloc] initWithCard:card andFrame:self.cardsContainer.bounds];
     
-    self.cardCenterInitialX = self.cardsContainer.center.x;
+    [self.backCardContainer addSubview:self.backCardView];
+    [self.cardsContainer insertSubview:self.backCardContainer belowSubview:self.frontCardContainer];
 }
 
 - (void)cardMoved {
@@ -99,9 +138,11 @@
         recognizer.state == UIGestureRecognizerStateCancelled ||
         recognizer.state == UIGestureRecognizerStateFailed) {
         
-        //Bring back card to initial position.
-        self.cardsContainer.center = CGPointMake(self.cardCenterInitialX, self.cardsContainer.center.y);
-        self.cardsContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+        [UIView animateWithDuration:0.3 animations:^{
+            //Bring back card to initial position.
+            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX, self.frontCardContainer.center.y);
+            self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+        }];
     } else {
         //Touch current position.
         CGPoint touchLocation = [recognizer locationInView:self.view];
@@ -113,14 +154,14 @@
             float touchPositionOffset = self.cardPanInitialX - touchLocation.x;
             
             //Move card according to touch offset.
-            self.cardsContainer.center = CGPointMake(self.cardCenterInitialX - touchPositionOffset, self.cardsContainer.center.y);
+            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX - touchPositionOffset, self.frontCardContainer.center.y);
             
             //Compute rotation according to touch offset.
-            float maxTranslation = (self.view.bounds.size.width + self.cardsContainer.bounds.size.width)/2;
+            float maxTranslation = (self.view.bounds.size.width + self.frontCardContainer.bounds.size.width)/2;
             float rotateRatio = touchPositionOffset/maxTranslation;
         
             //Apply rotation.
-            self.cardsContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(rotateRatio * 15));
+            self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(rotateRatio * 15));
         }
     }
 }

@@ -12,6 +12,8 @@
 
 #define OVERLAY_GRADIENT_HEIGHT 70.0
 #define TITLE_LABEL_HEIGHT 40.0
+#define CORNER_RADIUS 5.0
+#define BORDER_WIDTH 0.5
 
 @interface RACCardView ()
 
@@ -48,8 +50,10 @@
         [self addSubview:self.view];
         
         //Add borders and round corners to the view.
-        self.layer.cornerRadius = 5.0;
+        self.layer.cornerRadius = CORNER_RADIUS;
         self.clipsToBounds = YES;
+        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.layer.borderWidth = BORDER_WIDTH;
         
         //Fill card information.
         [self loadImage];
