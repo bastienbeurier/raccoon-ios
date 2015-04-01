@@ -15,9 +15,6 @@
 
 @interface RACCardView ()
 
-//Card object.
-@property (strong, nonatomic) RACCard *card;
-
 //Subviews.
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

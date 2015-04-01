@@ -65,10 +65,83 @@
                         <outlet property="cardsContainer" destination="2QH-r0-8mj" id="ZFv-l4-6mA"/>
                         <outlet property="firstDecorationCard" destination="4vR-SV-wLn" id="rL9-MZ-45b"/>
                         <outlet property="secondDecorationCard" destination="zgv-5q-8qh" id="uap-Fq-UTj"/>
+                        <segue destination="jJ7-Ms-B07" kind="custom" identifier="Recipe Segue" customClass="CrossDissolveSegue" id="KBM-6H-KzB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Recipe View Controller-->
+        <scene sceneID="MDL-9b-jXB">
+            <objects>
+                <viewController id="jJ7-Ms-B07" customClass="RACRecipeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DOU-XO-pUM"/>
+                        <viewControllerLayoutGuide type="bottom" id="UaV-Ko-r49"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Aik-1B-kL5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDq-bL-rtM">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rka-ch-1cw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTu-XP-RHN">
+                                        <rect key="frame" x="60" y="20" width="480" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="PtU-Nq-UBl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.41960784309999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="zTu-XP-RHN" secondAttribute="centerY" constant="-5" id="7kt-NV-qan"/>
+                                    <constraint firstItem="zTu-XP-RHN" firstAttribute="leading" secondItem="rka-ch-1cw" secondAttribute="leading" constant="60" id="90J-Ch-1Fs"/>
+                                    <constraint firstAttribute="trailing" secondItem="zTu-XP-RHN" secondAttribute="trailing" constant="60" id="SZ5-8d-BaQ"/>
+                                    <constraint firstAttribute="height" constant="60" id="YtC-qG-FCM"/>
+                                    <constraint firstAttribute="centerX" secondItem="zTu-XP-RHN" secondAttribute="centerX" id="aWk-an-FEe"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLR-jI-GcM">
+                                <rect key="frame" x="0.0" y="10" width="50" height="50"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="15" maxX="20" maxY="15"/>
+                                <state key="normal" image="WhiteBackArrow">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="jJ7-Ms-B07" eventType="touchUpInside" id="6c1-2z-sNE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IDq-bL-rtM" firstAttribute="leading" secondItem="Aik-1B-kL5" secondAttribute="leading" id="9On-jr-1dR"/>
+                            <constraint firstItem="UaV-Ko-r49" firstAttribute="top" secondItem="IDq-bL-rtM" secondAttribute="bottom" id="H2A-En-4Mu"/>
+                            <constraint firstItem="rka-ch-1cw" firstAttribute="leading" secondItem="Aik-1B-kL5" secondAttribute="leading" id="dKg-cG-NKE"/>
+                            <constraint firstItem="IDq-bL-rtM" firstAttribute="top" secondItem="Aik-1B-kL5" secondAttribute="top" id="dfv-39-ZzP"/>
+                            <constraint firstAttribute="trailing" secondItem="rka-ch-1cw" secondAttribute="trailing" id="mAk-RF-5PC"/>
+                            <constraint firstItem="rka-ch-1cw" firstAttribute="top" secondItem="Aik-1B-kL5" secondAttribute="top" id="oEP-mx-JGA"/>
+                            <constraint firstAttribute="trailing" secondItem="IDq-bL-rtM" secondAttribute="trailing" id="t8o-gf-Abc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navBar" destination="rka-ch-1cw" id="ttA-3x-iy4"/>
+                        <outlet property="scrollView" destination="IDq-bL-rtM" id="iwS-A9-CMb"/>
+                        <outlet property="titleView" destination="zTu-XP-RHN" id="Wle-T0-OJf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vas-Mc-yMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1155" y="372"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="WhiteBackArrow" width="32" height="32"/>
+    </resources>
 </document>

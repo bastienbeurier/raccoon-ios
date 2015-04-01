@@ -9,6 +9,7 @@
 #import "RACMainViewController.h"
 #import "RACCard.h"
 #import "RACCardView.h"
+#import "RACRecipeViewController.h"
 
 #define CARDS_LOADING_BATCH 10
 #define   DEGREES_TO_RADIANS(degrees)  ((3.1416 * degrees)/ 180)
@@ -48,6 +49,10 @@
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cardPanned:)];
     [self.cardsContainer addGestureRecognizer:panGestureRecognizer];
     
+    //Set card tap gesture recognizer.
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cardPressed:)];
+    [self.cardsContainer addGestureRecognizer:tapGestureRecognizer];
+    
     //Set first decoration card border.
     self.firstDecorationCard.layer.cornerRadius = DECORATION_CARD_CORNER_RADIUS;
     self.firstDecorationCard.layer.borderWidth = DECORATION_CARD_BORDER_WIDTH;
@@ -63,6 +68,15 @@
     [super viewDidAppear:animated];
     
     [self loadCards];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString * segueName = segue.identifier;
+    
+    if ([segueName isEqualToString: @"Recipe Segue"]) {
+        ((RACRecipeViewController *) [segue destinationViewController]).card = self.frontCardView.card;
+    }
 }
 
 - (void)loadCards {
@@ -140,6 +154,10 @@
 
 - (void)cardDismissed {
     
+}
+
+- (void)cardPressed:(UITapGestureRecognizer *)recognizer {
+    [self performSegueWithIdentifier:@"Recipe Segue" sender:nil];
 }
 
 - (void)cardPanned:(UIPanGestureRecognizer *)recognizer {
