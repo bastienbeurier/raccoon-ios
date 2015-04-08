@@ -19,16 +19,10 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
-@property (weak, nonatomic) IBOutlet UILabel *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *firstInfoView;
 @property (weak, nonatomic) IBOutlet UILabel *secondInfoView;
-@property (weak, nonatomic) IBOutlet UILabel *thirdInfoView;
-@property (weak, nonatomic) IBOutlet UILabel *firstInfoTitle;
-@property (weak, nonatomic) IBOutlet UILabel *secondInfoTitle;
-@property (weak, nonatomic) IBOutlet UILabel *thirdInfoTitle;
-@property (weak, nonatomic) IBOutlet UILabel *ingredientsView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingSpinner;
-@property (weak, nonatomic) IBOutlet UIView *titleBackgroundView;
+@property (weak, nonatomic) IBOutlet UITextView *titleView;
 
 @end
 
@@ -56,9 +50,6 @@
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.layer.borderWidth = BORDER_WIDTH;
         
-        //Set gradient.
-        [self setTitleBackgroundGradient];
-        
         //Fill card information.
         [self loadImage];
         [self setInfoLabels];
@@ -79,7 +70,7 @@
 // ----------------------------------------------------------
 
 - (void)loadImage {
-    self.titleBackgroundView.hidden = YES;
+    self.overlayView.hidden = YES;
     [self.imageLoadingSpinner startAnimating];
     
     //Load image.
@@ -89,34 +80,30 @@
                                        [self.imageLoadingSpinner stopAnimating];
                                        self.imageLoadingSpinner.hidden = YES;
                                        self.imageView.image = image;
-                                       self.titleBackgroundView.hidden = NO;
                                        [self setOverlayLabels];
+                                       [self setOverlayGradient];
+                                       self.overlayView.hidden = NO;
                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *errir) {
                                        //
                                    }];
 }
 
-- (void)setTitleBackgroundGradient {
+- (void)setOverlayGradient {
     //Vertical black to clear gradient.
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    CGRect gradientFrame = self.titleBackgroundView.bounds;
+    CGRect gradientFrame = self.overlayView.bounds;
     gradient.frame = gradientFrame;
     UIColor *startColor = [UIColor clearColor];
-    UIColor *endColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+    UIColor *endColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
     gradient.colors = [NSArray arrayWithObjects:(id)[startColor CGColor], (id)[endColor CGColor], nil];
-    [self.titleBackgroundView.layer insertSublayer:gradient atIndex:0];
+    [self.overlayView.layer insertSublayer:gradient atIndex:0];
 }
 
 - (void)setOverlayLabels {
-    self.titleView.text = self.card.title;
-    self.ingredientsView.text = self.card.ingredients;
+    self.titleView.text = [self.card.title uppercaseString];
 }
 
 - (void)setInfoLabels {
-    self.firstInfoTitle.text = [NSLocalizedString(@"healthy", nil) uppercaseString];
-    self.secondInfoTitle.text = [NSLocalizedString(@"time", nil) uppercaseString];
-    self.thirdInfoTitle.text = [NSLocalizedString(@"price", nil) uppercaseString];
-    
     self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.card.healthScore];
     self.secondInfoView.text = [NSString stringWithFormat:@"%ld %@", self.card.duration, NSLocalizedString(@"min", nil)];
     
@@ -125,8 +112,6 @@
     for (NSInteger i = 0; i < self.card.price + 1; i++) {
         priceStr = [priceStr stringByAppendingString:@"$"];
     }
-    
-    self.thirdInfoView.text = priceStr;
 }
 
 @end
