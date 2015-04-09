@@ -35,12 +35,17 @@
 
 @property (nonatomic) float cardCenterInitialX;
 
+@property (nonatomic) BOOL cardsInitiallyLoaded;
+
 @end
 
 @implementation RACMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Cards are not loaded yet.
+    self.cardsInitiallyLoaded = NO;
     
     //Init the queue of loaded cards.
     self.cardsQueue = [[NSMutableArray alloc] initWithCapacity:CARDS_LOADING_BATCH];
@@ -67,7 +72,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self loadCards];
+    if (!self.cardsInitiallyLoaded) {
+        [self loadCards];
+        self.cardsInitiallyLoaded = YES;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -92,15 +100,7 @@
 }
 
 - (void)createFrontCardView {
-    //TODO BB: remove, just for testing
-    RACCard *card = [[RACCard alloc] init];
-    
-    card.imageUrl = @"http://afoodcentriclife.com/wp-content/uploads/2014/06/Waimea-Salad1.jpg";
-    card.title = @"Tomato Mozzarella Sticks";
-    card.ingredients = @"tomato, mozzarella, basil, balsamic vinegar, olive oil";
-    card.healthScore = 87;
-    card.duration = 5;
-    card.price = 0;
+    RACCard *card = [self salad];
     
     self.frontCardContainer = [[UIView alloc] initWithFrame:self.cardsContainer.bounds];
     self.frontCardView = [[RACCardView alloc] initWithCard:card andFrame:self.cardsContainer.bounds];
@@ -112,7 +112,35 @@
 }
 
 - (void)createBackCardView {
-    //TODO BB: remove, just for testing
+    RACCard *card;
+    
+    if ([self.frontCardView.card.title isEqualToString:@"Tomato Mozzarella Sticks"]) {
+        card = [self salad];
+    } else {
+        card = [self mozza];
+    }
+    
+    self.backCardContainer = [[UIView alloc] initWithFrame:self.cardsContainer.bounds];
+    self.backCardView = [[RACCardView alloc] initWithCard:card andFrame:self.cardsContainer.bounds];
+    
+    [self.backCardContainer addSubview:self.backCardView];
+    [self.cardsContainer insertSubview:self.backCardContainer belowSubview:self.frontCardContainer];
+}
+
+- (RACCard *)mozza {
+    RACCard *card = [[RACCard alloc] init];
+    
+    card.imageUrl = @"http://thumbs.dreamstime.com/x/sticks-tomato-mozzarella-basil-16255384.jpg";
+    card.title = @"Tomato Mozzarella Sticks";
+    card.ingredients = @"tomato, mozzarella, basil, balsamic vinegar, olive oil";
+    card.healthScore = 87;
+    card.duration = 5;
+    card.price = 0;
+    
+    return card;
+}
+
+- (RACCard *)salad {
     RACCard *card = [[RACCard alloc] init];
     
     card.imageUrl = @"http://afoodcentriclife.com/wp-content/uploads/2014/06/Waimea-Salad1.jpg";
@@ -122,11 +150,7 @@
     card.duration = 10;
     card.price = 0;
     
-    self.backCardContainer = [[UIView alloc] initWithFrame:self.cardsContainer.bounds];
-    self.backCardView = [[RACCardView alloc] initWithCard:card andFrame:self.cardsContainer.bounds];
-    
-    [self.backCardContainer addSubview:self.backCardView];
-    [self.cardsContainer insertSubview:self.backCardContainer belowSubview:self.frontCardContainer];
+    return card;
 }
 
 - (void)bringBackCardToFrontAndCreateNewBackCard {

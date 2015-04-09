@@ -37,40 +37,40 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agM-ti-7jw">
-                                    <rect key="frame" x="25" y="6" width="30.5" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                    <rect key="frame" x="25" y="6" width="32" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="g2m-qP-j57">
-                                    <rect key="frame" x="65" y="2" width="25" height="25"/>
+                                    <rect key="frame" x="68" y="2" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="1Mw-PV-2dd"/>
                                         <constraint firstAttribute="width" constant="25" id="cGn-k1-I7S"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tw-6r-WOu">
-                                    <rect key="frame" x="90" y="5" width="36" height="20"/>
-                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                    <rect key="frame" x="92" y="5" width="38" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="price" translatesAutoresizingMaskIntoConstraints="NO" id="crA-KK-YBA">
-                                    <rect key="frame" x="136" y="2" width="25" height="25"/>
+                                    <rect key="frame" x="140" y="2" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="25" id="V2N-0z-tAb"/>
                                         <constraint firstAttribute="height" constant="25" id="faR-8H-hTh"/>
                                     </constraints>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="price" translatesAutoresizingMaskIntoConstraints="NO" id="KOh-em-TZ4">
-                                    <rect key="frame" x="156" y="2" width="25" height="25"/>
+                                    <rect key="frame" x="160" y="2" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="0Us-Tz-lEk"/>
                                         <constraint firstAttribute="width" constant="25" id="be0-gw-PJO"/>
                                     </constraints>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="price" translatesAutoresizingMaskIntoConstraints="NO" id="iej-Y4-JeO">
-                                    <rect key="frame" x="176" y="2" width="25" height="25"/>
+                                    <rect key="frame" x="180" y="2" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="2q3-bg-AUV"/>
                                         <constraint firstAttribute="width" constant="25" id="Z4R-WP-0OH"/>

@@ -105,7 +105,7 @@
 
 - (void)setInfoLabels {
     self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.card.healthScore];
-    self.secondInfoView.text = [NSString stringWithFormat:@"%ld %@", self.card.duration, NSLocalizedString(@"min", nil)];
+    self.secondInfoView.text = [NSString stringWithFormat:@"%ld%@", self.card.duration, NSLocalizedString(@"min", nil)];
     
     NSString *priceStr = @"";
     

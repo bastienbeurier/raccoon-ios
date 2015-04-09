@@ -1,4 +1,7 @@
 "healthy" = "healthy";
+"ingredients" = "ingredients";
 "min" = "min";
 "price" = "price";
+"steps" = "steps";
 "time" = "time";
+
