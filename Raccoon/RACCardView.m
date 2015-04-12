@@ -33,11 +33,11 @@
 #pragma mark Overrides
 // ----------------------------------------------------------
 
-- (instancetype)initWithCard:(RACCard *)card andFrame:(CGRect)frame {
+- (instancetype)initWithRecipe:(RACRecipe *)recipe andFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (self) {
-        self.card = card;
+        self.recipe = recipe;
         
         //Init view from nib file.
         [[NSBundle mainBundle] loadNibNamed:@"RACCardView" owner:self options:nil];
@@ -74,7 +74,7 @@
     [self.imageLoadingSpinner startAnimating];
     
     //Load image.
-    [self.imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.card.imageUrl]]
+    [self.imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.recipe.imageUrl]]
                           placeholderImage:nil
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                                        [self.imageLoadingSpinner stopAnimating];
@@ -100,16 +100,16 @@
 }
 
 - (void)setOverlayLabels {
-    self.titleView.text = [self.card.title uppercaseString];
+    self.titleView.text = [self.recipe.title uppercaseString];
 }
 
 - (void)setInfoLabels {
-    self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.card.healthScore];
-    self.secondInfoView.text = [NSString stringWithFormat:@"%ld%@", self.card.duration, NSLocalizedString(@"min", nil)];
+    self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.recipe.healthiness];
+    self.secondInfoView.text = [NSString stringWithFormat:@"%ld%@", self.recipe.preparation, NSLocalizedString(@"min", nil)];
     
     NSString *priceStr = @"";
     
-    for (NSInteger i = 0; i < self.card.price + 1; i++) {
+    for (NSInteger i = 0; i < self.recipe.price + 1; i++) {
         priceStr = [priceStr stringByAppendingString:@"$"];
     }
 }

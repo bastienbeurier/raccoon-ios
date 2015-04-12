@@ -7,12 +7,13 @@
 //
 
 #import "RACMainViewController.h"
-#import "RACCard.h"
+#import "RACRecipe.h"
 #import "RACCardView.h"
 #import "RACRecipeViewController.h"
+#import "RACApi.h"
 
 #define CARDS_LOADING_BATCH 10
-#define   DEGREES_TO_RADIANS(degrees)  ((3.1416 * degrees)/ 180)
+#define DEGREES_TO_RADIANS(degrees)  ((3.1416 * degrees)/ 180)
 
 #define DECORATION_CARD_CORNER_RADIUS 5.0
 #define DECORATION_CARD_BORDER_WIDTH 0.5
@@ -37,6 +38,10 @@
 
 @property (nonatomic) BOOL cardsInitiallyLoaded;
 
+@property (nonatomic) NSInteger cardsOffset;
+
+@property (nonatomic, strong) NSMutableArray *recipes;
+
 @end
 
 @implementation RACMainViewController
@@ -46,6 +51,8 @@
     
     //Cards are not loaded yet.
     self.cardsInitiallyLoaded = NO;
+    self.cardsOffset = 0;
+    self.recipes = [NSMutableArray new];
     
     //Init the queue of loaded cards.
     self.cardsQueue = [[NSMutableArray alloc] initWithCapacity:CARDS_LOADING_BATCH];
@@ -67,15 +74,9 @@
     self.secondDecorationCard.layer.cornerRadius = DECORATION_CARD_CORNER_RADIUS;
     self.secondDecorationCard.layer.borderWidth = DECORATION_CARD_BORDER_WIDTH;
     self.secondDecorationCard.layer.borderColor = [UIColor lightGrayColor].CGColor;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
     
-    if (!self.cardsInitiallyLoaded) {
-        [self loadCards];
-        self.cardsInitiallyLoaded = YES;
-    }
+    //Load recipes
+    [self loadCards];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -83,16 +84,23 @@
     NSString * segueName = segue.identifier;
     
     if ([segueName isEqualToString: @"Recipe Segue"]) {
-        ((RACRecipeViewController *) [segue destinationViewController]).card = self.frontCardView.card;
+        ((RACRecipeViewController *) [segue destinationViewController]).recipe = self.frontCardView.recipe;
     }
 }
 
 - (void)loadCards {
-    //BB TODO: load cards and add them to queue.
-    
-    [self createFrontCardView];
-    [self createBackCardView];
-    [self preloadImages];
+    [RACApi getRecipes:CARDS_LOADING_BATCH orderBy:@"created_at" offset:0 success:^(NSArray *recipes) {
+        [self.recipes addObjectsFromArray:recipes];
+        
+        //Create front and back card.
+        [self createFrontCardView];
+        [self createBackCardView];
+        
+        //TODO BB: create queue to load images.
+        [self preloadImages];
+    } failure:^{
+        //TODO BB: show connection problem UI.
+    }];
 }
 
 - (void)preloadImages {
@@ -100,57 +108,33 @@
 }
 
 - (void)createFrontCardView {
-    RACCard *card = [self salad];
+    if ([self.recipes count] == 0) {
+        return;
+    }
+    
+    RACRecipe *recipe = [self.recipes firstObject];
+    [self.recipes removeObjectAtIndex:0];
     
     self.frontCardContainer = [[UIView alloc] initWithFrame:self.cardsContainer.bounds];
-    self.frontCardView = [[RACCardView alloc] initWithCard:card andFrame:self.cardsContainer.bounds];
+    self.frontCardView = [[RACCardView alloc] initWithRecipe:recipe andFrame:self.cardsContainer.bounds];
     
     [self.frontCardContainer addSubview:self.frontCardView];
     [self.cardsContainer addSubview:self.frontCardContainer];
-    
-    self.cardCenterInitialX = self.frontCardContainer.center.x;
 }
 
 - (void)createBackCardView {
-    RACCard *card;
-    
-    if ([self.frontCardView.card.title isEqualToString:@"Tomato Mozzarella Sticks"]) {
-        card = [self salad];
-    } else {
-        card = [self mozza];
+    if ([self.recipes count] == 0) {
+        return;
     }
     
+    RACRecipe *recipe = [self.recipes firstObject];
+    [self.recipes removeObjectAtIndex:0];
+    
     self.backCardContainer = [[UIView alloc] initWithFrame:self.cardsContainer.bounds];
-    self.backCardView = [[RACCardView alloc] initWithCard:card andFrame:self.cardsContainer.bounds];
+    self.backCardView = [[RACCardView alloc] initWithRecipe:recipe andFrame:self.cardsContainer.bounds];
     
     [self.backCardContainer addSubview:self.backCardView];
     [self.cardsContainer insertSubview:self.backCardContainer belowSubview:self.frontCardContainer];
-}
-
-- (RACCard *)mozza {
-    RACCard *card = [[RACCard alloc] init];
-    
-    card.imageUrl = @"http://thumbs.dreamstime.com/x/sticks-tomato-mozzarella-basil-16255384.jpg";
-    card.title = @"Tomato Mozzarella Sticks";
-    card.ingredients = @"tomato, mozzarella, basil, balsamic vinegar, olive oil";
-    card.healthScore = 87;
-    card.duration = 5;
-    card.price = 0;
-    
-    return card;
-}
-
-- (RACCard *)salad {
-    RACCard *card = [[RACCard alloc] init];
-    
-    card.imageUrl = @"http://afoodcentriclife.com/wp-content/uploads/2014/06/Waimea-Salad1.jpg";
-    card.title = @"Hawaiian Salad";
-    card.ingredients = @"salad, tomato, feta cheese, apricot";
-    card.healthScore = 76;
-    card.duration = 10;
-    card.price = 0;
-    
-    return card;
 }
 
 - (void)bringBackCardToFrontAndCreateNewBackCard {
@@ -158,26 +142,6 @@
     self.frontCardView = self.backCardView;
     
     [self createBackCardView];
-}
-
-- (void)cardMoved {
-    
-}
-
-- (void)cardPressed {
-    
-}
-
-- (void)cardDismissPressed {
-    
-}
-
-- (void)animateDismissCard {
-    
-}
-
-- (void)cardDismissed {
-    
 }
 
 - (void)cardPressed:(UITapGestureRecognizer *)recognizer {
@@ -198,33 +162,10 @@
         
         //Card is panned enough to be dismissed.
         if (ABS(touchPositionOffset) > self.cardsContainer.frame.size.width / 2) {
-            [UIView animateWithDuration:0.2 animations:^{
-                float offScreenPosition = self.view.bounds.size.width + self.frontCardContainer.bounds.size.width;
-                
-                //Move card out of screen.
-                if (touchPositionOffset > 0) {
-                    self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX - offScreenPosition, self.frontCardContainer.center.y);
-                } else {
-                    self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX + offScreenPosition, self.frontCardContainer.center.y);
-                }
-                
-                //Apply rotation.
-                self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(15));
-            } completion:^(BOOL finished) {
-                //Dismiss card
-                [self.frontCardContainer removeFromSuperview];
-                [self.frontCardView removeFromSuperview];
-                
-                //Update front and back cards
-                [self bringBackCardToFrontAndCreateNewBackCard];
-            }];
+            [self dismissCard:touchPositionOffset];
         //Card is not panned enough to be dismissed.
         } else {
-            [UIView animateWithDuration:0.3 animations:^{
-                //Bring back card to initial position.
-                self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX, self.frontCardContainer.center.y);
-                self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
-            }];
+            [self restoreCardPosition];
         }
     //Card is panned.
     } else {
@@ -243,6 +184,39 @@
             self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(rotateRatio * 15));
         }
     }
+}
+
+- (void)dismissCard:(NSInteger)offset
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        float offScreenPosition = self.view.bounds.size.width + self.frontCardContainer.bounds.size.width;
+        
+        //Move card out of screen.
+        if (offset > 0) {
+            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX - offScreenPosition, self.frontCardContainer.center.y);
+        } else {
+            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX + offScreenPosition, self.frontCardContainer.center.y);
+        }
+        
+        //Apply rotation.
+        self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(15));
+    } completion:^(BOOL finished) {
+        //Dismiss card
+        [self.frontCardContainer removeFromSuperview];
+        [self.frontCardView removeFromSuperview];
+        
+        //Update front and back cards
+        [self bringBackCardToFrontAndCreateNewBackCard];
+    }];
+}
+
+- (void)restoreCardPosition
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        //Bring back card to initial position.
+        self.frontCardContainer.center = CGPointMake(self.backCardContainer.center.x, self.frontCardContainer.center.y);
+        self.frontCardContainer.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0));
+    }];
 }
 
 

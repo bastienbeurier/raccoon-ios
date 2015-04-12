@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RACCard.h"
+#import "RACRecipe.h"
 
 @interface RACCardView : UIView
 
 //Card object.
-@property (strong, nonatomic) RACCard *card;
+@property (strong, nonatomic) RACRecipe *recipe;
 
-- (id)initWithCard:(RACCard *)card andFrame:(CGRect)frame;
+- (id)initWithRecipe:(RACRecipe *)recipe andFrame:(CGRect)frame;
 
 @end

@@ -11,6 +11,10 @@
 		0B3D2DE21AC5C74B00691808 /* RACCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE01AC5C74B00691808 /* RACCardView.xib */; };
 		0B3D2DE31AC5D11A00691808 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE61AC5D11A00691808 /* Localizable.strings */; };
 		0B3D2DE41AC5D11A00691808 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE61AC5D11A00691808 /* Localizable.strings */; };
+		0B5B0C241ADAFCB5001BBFAD /* RACApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C231ADAFCB5001BBFAD /* RACApi.m */; };
+		0B5B0C251ADAFCB5001BBFAD /* RACApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C231ADAFCB5001BBFAD /* RACApi.m */; };
+		0B5B0C281ADAFD31001BBFAD /* RACConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C271ADAFD31001BBFAD /* RACConstants.m */; };
+		0B5B0C291ADAFD31001BBFAD /* RACConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C271ADAFD31001BBFAD /* RACConstants.m */; };
 		0B9A754C1AC4CA8C00E5B0F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A754B1AC4CA8C00E5B0F8 /* main.m */; };
 		0B9A754F1AC4CA8C00E5B0F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A754E1AC4CA8C00E5B0F8 /* AppDelegate.m */; };
 		0B9A75521AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75501AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld */; };
@@ -21,8 +25,8 @@
 		0B9A75691AC4CA8C00E5B0F8 /* RaccoonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75681AC4CA8C00E5B0F8 /* RaccoonTests.m */; };
 		0B9A75761AC4CD4600E5B0F8 /* RACCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75751AC4CD4600E5B0F8 /* RACCardView.m */; };
 		0B9A75771AC4CD4600E5B0F8 /* RACCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75751AC4CD4600E5B0F8 /* RACCardView.m */; };
-		0B9A757B1AC4CDA100E5B0F8 /* RACCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A757A1AC4CDA100E5B0F8 /* RACCard.m */; };
-		0B9A757C1AC4CDA100E5B0F8 /* RACCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A757A1AC4CDA100E5B0F8 /* RACCard.m */; };
+		0B9A757B1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */; };
+		0B9A757C1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */; };
 		0BF0537E1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF0537D1ACC5FFA008D5C55 /* RACRecipeViewController.m */; };
 		0BF0537F1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF0537D1ACC5FFA008D5C55 /* RACRecipeViewController.m */; };
 		0BF053871ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF053861ACC64E1008D5C55 /* CrossDissolveSegue.m */; };
@@ -46,6 +50,10 @@
 /* Begin PBXFileReference section */
 		0B3D2DE01AC5C74B00691808 /* RACCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACCardView.xib; sourceTree = "<group>"; };
 		0B3D2DE51AC5D11A00691808 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0B5B0C221ADAFCB5001BBFAD /* RACApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACApi.h; sourceTree = "<group>"; };
+		0B5B0C231ADAFCB5001BBFAD /* RACApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACApi.m; sourceTree = "<group>"; };
+		0B5B0C261ADAFD31001BBFAD /* RACConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACConstants.h; sourceTree = "<group>"; };
+		0B5B0C271ADAFD31001BBFAD /* RACConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACConstants.m; sourceTree = "<group>"; };
 		0B9A75461AC4CA8C00E5B0F8 /* Raccoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raccoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9A754A1AC4CA8C00E5B0F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B9A754B1AC4CA8C00E5B0F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,8 +70,8 @@
 		0B9A75681AC4CA8C00E5B0F8 /* RaccoonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RaccoonTests.m; sourceTree = "<group>"; };
 		0B9A75741AC4CD4600E5B0F8 /* RACCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACCardView.h; sourceTree = "<group>"; };
 		0B9A75751AC4CD4600E5B0F8 /* RACCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACCardView.m; sourceTree = "<group>"; };
-		0B9A75791AC4CDA100E5B0F8 /* RACCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACCard.h; sourceTree = "<group>"; };
-		0B9A757A1AC4CDA100E5B0F8 /* RACCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACCard.m; sourceTree = "<group>"; };
+		0B9A75791AC4CDA100E5B0F8 /* RACRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipe.h; sourceTree = "<group>"; };
+		0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipe.m; sourceTree = "<group>"; };
 		0BF0537C1ACC5FFA008D5C55 /* RACRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipeViewController.h; sourceTree = "<group>"; };
 		0BF0537D1ACC5FFA008D5C55 /* RACRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipeViewController.m; sourceTree = "<group>"; };
 		0BF053851ACC64E1008D5C55 /* CrossDissolveSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossDissolveSegue.h; sourceTree = "<group>"; };
@@ -118,6 +126,10 @@
 			children = (
 				0BF053891ACC83A0008D5C55 /* RACGraphics.h */,
 				0BF0538A1ACC83A0008D5C55 /* RACGraphics.m */,
+				0B5B0C221ADAFCB5001BBFAD /* RACApi.h */,
+				0B5B0C231ADAFCB5001BBFAD /* RACApi.m */,
+				0B5B0C261ADAFD31001BBFAD /* RACConstants.h */,
+				0B5B0C271ADAFD31001BBFAD /* RACConstants.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -210,8 +222,8 @@
 		0B9A75781AC4CD7F00E5B0F8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0B9A75791AC4CDA100E5B0F8 /* RACCard.h */,
-				0B9A757A1AC4CDA100E5B0F8 /* RACCard.m */,
+				0B9A75791AC4CDA100E5B0F8 /* RACRecipe.h */,
+				0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -416,11 +428,13 @@
 				0B9A754F1AC4CA8C00E5B0F8 /* AppDelegate.m in Sources */,
 				0B9A754C1AC4CA8C00E5B0F8 /* main.m in Sources */,
 				0BF0537E1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */,
+				0B5B0C241ADAFCB5001BBFAD /* RACApi.m in Sources */,
 				0BF053871ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */,
 				0B9A75551AC4CA8C00E5B0F8 /* RACMainViewController.m in Sources */,
 				0B9A75521AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld in Sources */,
 				0B9A75761AC4CD4600E5B0F8 /* RACCardView.m in Sources */,
-				0B9A757B1AC4CDA100E5B0F8 /* RACCard.m in Sources */,
+				0B9A757B1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */,
+				0B5B0C281ADAFD31001BBFAD /* RACConstants.m in Sources */,
 				0BF0538B1ACC83A0008D5C55 /* RACGraphics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,11 +443,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5B0C251ADAFCB5001BBFAD /* RACApi.m in Sources */,
 				0BF053881ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */,
 				0B9A75691AC4CA8C00E5B0F8 /* RaccoonTests.m in Sources */,
 				0BF0537F1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */,
+				0B5B0C291ADAFD31001BBFAD /* RACConstants.m in Sources */,
 				0B9A75771AC4CD4600E5B0F8 /* RACCardView.m in Sources */,
-				0B9A757C1AC4CDA100E5B0F8 /* RACCard.m in Sources */,
+				0B9A757C1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */,
 				0BF0538C1ACC83A0008D5C55 /* RACGraphics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

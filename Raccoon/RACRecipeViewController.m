@@ -47,6 +47,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *ingredientLabel1;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientLabel2;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientLabel3;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientLabel4;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientLabel5;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientLabel6;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientLabel7;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientLabel8;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientLabel9;
+@property (weak, nonatomic) IBOutlet UILabel *ingredientLabel10;
 @property (strong, nonatomic) NSArray *ingredientContainers;
 @property (strong, nonatomic) NSArray *ingredientLabels;
 @property (weak, nonatomic) IBOutlet UILabel *stepsCategoryLabel;
@@ -72,8 +79,6 @@
 @property (strong, nonatomic) NSArray *stepNbrs;
 @property (strong, nonatomic) NSArray *stepDescs;
 
-@property (strong, nonatomic) NSArray *steps;
-
 @end
 
 @implementation RACRecipeViewController
@@ -98,7 +103,14 @@
     
     self.ingredientLabels = @[self.ingredientLabel1,
                               self.ingredientLabel2,
-                              self.ingredientLabel3];
+                              self.ingredientLabel3,
+                              self.ingredientLabel4,
+                              self.ingredientLabel5,
+                              self.ingredientLabel6,
+                              self.ingredientLabel7,
+                              self.ingredientLabel8,
+                              self.ingredientLabel9,
+                              self.ingredientLabel10];
     
     self.stepContainers = @[self.stepContainer1,
                             self.stepContainer2,
@@ -126,9 +138,9 @@
     [self.scrollView setNeedsUpdateConstraints];
     
     //Set recipe image.
-    [self.imageView setImageWithURL:[NSURL URLWithString:self.card.imageUrl]];
+    [self.imageView setImageWithURL:[NSURL URLWithString:self.recipe.imageUrl]];
     
-    self.titleView.text = self.card.title;
+    self.titleView.text = self.recipe.title;
     
     self.navBar.alpha = 0;
     
@@ -152,12 +164,12 @@
     self.secondInfoTitle.text = [NSLocalizedString(@"time", nil) uppercaseString];
     self.thirdInfoTitle.text = [NSLocalizedString(@"price", nil) uppercaseString];
     
-    self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.card.healthScore];
-    self.secondInfoView.text = [NSString stringWithFormat:@"%ld %@", self.card.duration, NSLocalizedString(@"min", nil)];
+    self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.recipe.healthiness];
+    self.secondInfoView.text = [NSString stringWithFormat:@"%ld %@", self.recipe.preparation, NSLocalizedString(@"min", nil)];
     
     NSString *priceStr = @"";
     
-    for (NSInteger i = 0; i < self.card.price + 1; i++) {
+    for (NSInteger i = 0; i < self.recipe.price + 1; i++) {
         priceStr = [priceStr stringByAppendingString:@"$"];
     }
     
@@ -176,14 +188,10 @@
 - (void)setIngredients {
     self.ingredientsCategoryLabel.text = [NSLocalizedString(@"ingredients", nil) uppercaseString];
     
-    NSArray *ingredients = @[@"1 pack of cherry tomatoes",
-                             @"1 pack of cherry size mozzarella",
-                             @"1 pack of fresh basil leaves"];
-    
     for (NSInteger i = 0; i < [self.ingredientContainers count]; i++) {
-        if (i < [ingredients count]) {
+        if (i < [self.recipe.ingredients count]) {
             //Set ingredient text.
-            ((UILabel *) [self.ingredientLabels objectAtIndex:i]).text = [ingredients objectAtIndex:i];
+            ((UILabel *) [self.ingredientLabels objectAtIndex:i]).text = [self.recipe.ingredients objectAtIndex:i];
         } else {
             //Hide ingredient container.
             ((UIView *) [self.ingredientContainers objectAtIndex:i]).hidden = YES;
@@ -191,7 +199,7 @@
     }
     
     //Update the container constraint depending on the number of ingredients.
-    self.ingredientsContainerHeightConstraint.constant = [ingredients count] * self.ingredientContainer1.frame.size.height;
+    self.ingredientsContainerHeightConstraint.constant = [self.recipe.ingredients count] * self.ingredientContainer1.frame.size.height;
     [self.ingredientsContainer setNeedsUpdateConstraints];
     
     //Round corners.
@@ -203,17 +211,13 @@
     //Set categroy title.
     self.stepsCategoryLabel.text = [NSLocalizedString(@"steps", nil) uppercaseString];
     
-    self.steps = @[@"This is a short step.",
-                             @"This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step. This is a medium step.",
-                             @"This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. \n\nThis is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. \n\nThis is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step. This is a long step."];
-    
     for (NSInteger i = 0; i < [self.stepContainers count]; i++) {
-        if (i < [self.steps count]) {
+        if (i < [self.recipe.steps count]) {
             //Set nbr text.
-            ((UILabel *) [self.stepNbrs objectAtIndex:i]).text = [NSString stringWithFormat:@"%ld/%ld", i + 1, [self.steps count]];
+            ((UILabel *) [self.stepNbrs objectAtIndex:i]).text = [NSString stringWithFormat:@"%ld/%ld", i + 1, [self.recipe.steps count]];
             
             //Set description text.
-            ((UITextView *) [self.stepDescs objectAtIndex:i]).text = [self.steps objectAtIndex:i];
+            ((UITextView *) [self.stepDescs objectAtIndex:i]).text = [self.recipe.steps objectAtIndex:i];
             
             //Corder radius
             ((UIView *) [self.stepContainers objectAtIndex:i]).clipsToBounds = YES;
