@@ -37,12 +37,17 @@
                                 <rect key="frame" x="10" y="80" width="580" height="400"/>
                                 <gestureRecognizers/>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DSr-JG-kXR">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="DSr-JG-kXR" secondAttribute="centerY" id="1gh-DC-Jjw"/>
                             <constraint firstItem="4vR-SV-wLn" firstAttribute="trailing" secondItem="2QH-r0-8mj" secondAttribute="trailing" constant="-5" id="8A1-As-TRg"/>
                             <constraint firstItem="4vR-SV-wLn" firstAttribute="leading" secondItem="zgv-5q-8qh" secondAttribute="leading" constant="-5" id="9WC-tK-hEO"/>
                             <constraint firstItem="2QH-r0-8mj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="BcH-Jv-CFL"/>
+                            <constraint firstAttribute="centerX" secondItem="DSr-JG-kXR" secondAttribute="centerX" id="Dqk-Sa-vZw"/>
                             <constraint firstItem="4vR-SV-wLn" firstAttribute="bottom" secondItem="2QH-r0-8mj" secondAttribute="bottom" id="IYo-hs-3g7"/>
                             <constraint firstAttribute="trailing" secondItem="2QH-r0-8mj" secondAttribute="trailing" constant="10" id="LWR-y4-BTP"/>
                             <constraint firstItem="4vR-SV-wLn" firstAttribute="leading" secondItem="2QH-r0-8mj" secondAttribute="leading" constant="5" id="MKq-ZO-pIC"/>
@@ -64,6 +69,7 @@
                     <connections>
                         <outlet property="cardsContainer" destination="2QH-r0-8mj" id="ZFv-l4-6mA"/>
                         <outlet property="firstDecorationCard" destination="4vR-SV-wLn" id="rL9-MZ-45b"/>
+                        <outlet property="loadingSpinner" destination="DSr-JG-kXR" id="C8d-YG-dNu"/>
                         <outlet property="secondDecorationCard" destination="zgv-5q-8qh" id="uap-Fq-UTj"/>
                         <segue destination="jJ7-Ms-B07" kind="custom" identifier="Recipe Segue" customClass="CrossDissolveSegue" id="KBM-6H-KzB"/>
                     </connections>
@@ -494,8 +500,8 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sjk-wY-v1z">
-                                        <rect key="frame" x="10" y="387.5" width="580" height="297"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjk-wY-v1z">
+                                        <rect key="frame" x="10" y="389" width="580" height="297"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBs-Ed-wVs">
                                                 <rect key="frame" x="0.0" y="0.0" width="580" height="37"/>

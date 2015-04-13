@@ -1,7 +1,13 @@
 "healthy" = "healthy";
 "ingredients" = "ingredients";
 "min" = "min";
+"OK" = "OK";
 "price" = "price";
 "steps" = "steps";
 "time" = "time";
+
+//MainViewController
+
+"no_connection_title" = "Couldn't load recipes.";
+"no_connection_message" = "Please check that you have a valid connection.";
 

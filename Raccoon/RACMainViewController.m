@@ -11,6 +11,7 @@
 #import "RACCardView.h"
 #import "RACRecipeViewController.h"
 #import "RACApi.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 #define CARDS_LOADING_BATCH 10
 #define DEGREES_TO_RADIANS(degrees)  ((3.1416 * degrees)/ 180)
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *cardsContainer;
 @property (weak, nonatomic) IBOutlet UIView *firstDecorationCard;
 @property (weak, nonatomic) IBOutlet UIView *secondDecorationCard;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingSpinner;
 
 @property (strong, nonatomic) UIView *frontCardContainer;
 @property (strong, nonatomic) RACCardView *frontCardView;
@@ -34,13 +36,13 @@
 
 @property (nonatomic) float cardPanInitialX;
 
-@property (nonatomic) float cardCenterInitialX;
-
 @property (nonatomic) BOOL cardsInitiallyLoaded;
 
 @property (nonatomic) NSInteger cardsOffset;
 
 @property (nonatomic, strong) NSMutableArray *recipes;
+
+@property (nonatomic, strong) NSOperationQueue *imagesQueue;
 
 @end
 
@@ -54,8 +56,12 @@
     self.cardsOffset = 0;
     self.recipes = [NSMutableArray new];
     
-    //Init the queue of loaded cards.
+    //Init the array of loaded cards.
     self.cardsQueue = [[NSMutableArray alloc] initWithCapacity:CARDS_LOADING_BATCH];
+    
+    //Init the queue for downloading images.
+    self.imagesQueue = [[NSOperationQueue alloc] init];
+    self.imagesQueue.qualityOfService = NSQualityOfServiceUserInitiated;
     
     //Set card pan gesture recognizer.
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cardPanned:)];
@@ -69,11 +75,16 @@
     self.firstDecorationCard.layer.cornerRadius = DECORATION_CARD_CORNER_RADIUS;
     self.firstDecorationCard.layer.borderWidth = DECORATION_CARD_BORDER_WIDTH;
     self.firstDecorationCard.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.firstDecorationCard.hidden = YES;
     
     //Set second decoration card border.
     self.secondDecorationCard.layer.cornerRadius = DECORATION_CARD_CORNER_RADIUS;
     self.secondDecorationCard.layer.borderWidth = DECORATION_CARD_BORDER_WIDTH;
     self.secondDecorationCard.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.secondDecorationCard.hidden = YES;
+    
+    //Animate loading spinner.
+    [self.loadingSpinner startAnimating];
     
     //Load recipes
     [self loadCards];
@@ -90,21 +101,61 @@
 
 - (void)loadCards {
     [RACApi getRecipes:CARDS_LOADING_BATCH orderBy:@"created_at" offset:0 success:^(NSArray *recipes) {
+        //Add loaded recipes to the array of recipes.
         [self.recipes addObjectsFromArray:recipes];
         
-        //Create front and back card.
-        [self createFrontCardView];
-        [self createBackCardView];
-        
-        //TODO BB: create queue to load images.
-        [self preloadImages];
+        //Load the two first images.
+        [self.imagesQueue addOperationWithBlock: ^{
+            for (NSInteger i = 0; i < MIN([self.recipes count], 2); i++) {
+                RACRecipe *recipe = [self.recipes objectAtIndex:i];
+                NSURL *url = [NSURL URLWithString:recipe.imageUrl];
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                
+                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                [[UIImageView sharedImageCache] cacheImage:image forRequest:request];
+            }
+            
+            //Back on the UI thread.
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                //Remove loading spinner.
+                [self.loadingSpinner stopAnimating];
+                self.loadingSpinner.hidden = YES;
+                
+                //Create front and back card.
+                [self createFrontCardView];
+                [self createBackCardView];
+                
+                //Show decoration cards.
+                self.firstDecorationCard.hidden = NO;
+                self.secondDecorationCard.hidden = NO;
+                
+                [self preloadImages];
+            }];
+        }];
     } failure:^{
-        //TODO BB: show connection problem UI.
+        //Connection problem, show alert dialog.
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:NSLocalizedString(@"no_connection_title", nil)
+                                              message:NSLocalizedString(@"no_connection_message", nil)
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction *action) {[self loadCards];}];
+        [alertController addAction:ok];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 
 - (void)preloadImages {
-    
+    for (RACRecipe *recipe in self.recipes) {
+        [self.imagesQueue addOperationWithBlock: ^{
+            NSURL *url = [NSURL URLWithString:recipe.imageUrl];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [[UIImageView sharedImageCache] cacheImage:image forRequest:request];
+        }];
+    }
 }
 
 - (void)createFrontCardView {
@@ -174,7 +225,7 @@
             self.cardPanInitialX = touchLocation.x;
         } else {
             //Move card according to touch offset.
-            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX - touchPositionOffset, self.frontCardContainer.center.y);
+            self.frontCardContainer.center = CGPointMake(self.backCardContainer.center.x - touchPositionOffset, self.frontCardContainer.center.y);
             
             //Compute rotation according to touch offset.
             float maxTranslation = (self.view.bounds.size.width + self.frontCardContainer.bounds.size.width)/2;
@@ -193,9 +244,9 @@
         
         //Move card out of screen.
         if (offset > 0) {
-            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX - offScreenPosition, self.frontCardContainer.center.y);
+            self.frontCardContainer.center = CGPointMake(self.backCardContainer.center.x - offScreenPosition, self.frontCardContainer.center.y);
         } else {
-            self.frontCardContainer.center = CGPointMake(self.cardCenterInitialX + offScreenPosition, self.frontCardContainer.center.y);
+            self.frontCardContainer.center = CGPointMake(self.backCardContainer.center.x + offScreenPosition, self.frontCardContainer.center.y);
         }
         
         //Apply rotation.
