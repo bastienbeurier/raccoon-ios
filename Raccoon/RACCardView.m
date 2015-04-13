@@ -47,8 +47,6 @@
         //Add borders and round corners to the view.
         self.layer.cornerRadius = CORNER_RADIUS;
         self.clipsToBounds = YES;
-        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        self.layer.borderWidth = BORDER_WIDTH;
         
         //Fill card information.
         [self loadImage];
