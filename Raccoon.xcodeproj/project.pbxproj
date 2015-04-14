@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1F69661ADD850C003A6297 /* HappyFox-Condensed.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0B1F69651ADD850C003A6297 /* HappyFox-Condensed.otf */; };
 		0B3D2DE11AC5C74B00691808 /* RACCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE01AC5C74B00691808 /* RACCardView.xib */; };
 		0B3D2DE21AC5C74B00691808 /* RACCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE01AC5C74B00691808 /* RACCardView.xib */; };
 		0B3D2DE31AC5D11A00691808 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE61AC5D11A00691808 /* Localizable.strings */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B1F69651ADD850C003A6297 /* HappyFox-Condensed.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HappyFox-Condensed.otf"; sourceTree = "<group>"; };
 		0B3D2DE01AC5C74B00691808 /* RACCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACCardView.xib; sourceTree = "<group>"; };
 		0B3D2DE51AC5D11A00691808 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B5B0C221ADAFCB5001BBFAD /* RACApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACApi.h; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		0B741B7D1AC4D9EA0050739D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0B1F69651ADD850C003A6297 /* HappyFox-Condensed.otf */,
 				0B9A75591AC4CA8C00E5B0F8 /* Images.xcassets */,
 			);
 			name = Resources;
@@ -263,9 +266,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0B9A75451AC4CA8C00E5B0F8 /* Raccoon */ = {
+		0B9A75451AC4CA8C00E5B0F8 /* Hungry Raccoon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0B9A756C1AC4CA8C00E5B0F8 /* Build configuration list for PBXNativeTarget "Raccoon" */;
+			buildConfigurationList = 0B9A756C1AC4CA8C00E5B0F8 /* Build configuration list for PBXNativeTarget "Hungry Raccoon" */;
 			buildPhases = (
 				0762DD782D9E07359CFF90CD /* Check Pods Manifest.lock */,
 				0B9A75421AC4CA8C00E5B0F8 /* Sources */,
@@ -277,7 +280,7 @@
 			);
 			dependencies = (
 			);
-			name = Raccoon;
+			name = "Hungry Raccoon";
 			productName = Raccoon;
 			productReference = 0B9A75461AC4CA8C00E5B0F8 /* Raccoon.app */;
 			productType = "com.apple.product-type.application";
@@ -333,7 +336,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0B9A75451AC4CA8C00E5B0F8 /* Raccoon */,
+				0B9A75451AC4CA8C00E5B0F8 /* Hungry Raccoon */,
 				0B9A75611AC4CA8C00E5B0F8 /* RaccoonTests */,
 			);
 		};
@@ -348,6 +351,7 @@
 				0B3D2DE31AC5D11A00691808 /* Localizable.strings in Resources */,
 				0B9A755D1AC4CA8C00E5B0F8 /* LaunchScreen.xib in Resources */,
 				0B3D2DE11AC5C74B00691808 /* RACCardView.xib in Resources */,
+				0B1F69661ADD850C003A6297 /* HappyFox-Condensed.otf in Resources */,
 				0B9A755A1AC4CA8C00E5B0F8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +471,7 @@
 /* Begin PBXTargetDependency section */
 		0B9A75641AC4CA8C00E5B0F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0B9A75451AC4CA8C00E5B0F8 /* Raccoon */;
+			target = 0B9A75451AC4CA8C00E5B0F8 /* Hungry Raccoon */;
 			targetProxy = 0B9A75631AC4CA8C00E5B0F8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -586,6 +590,7 @@
 				INFOPLIST_FILE = Raccoon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -597,6 +602,7 @@
 				INFOPLIST_FILE = Raccoon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -648,7 +654,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0B9A756C1AC4CA8C00E5B0F8 /* Build configuration list for PBXNativeTarget "Raccoon" */ = {
+		0B9A756C1AC4CA8C00E5B0F8 /* Build configuration list for PBXNativeTarget "Hungry Raccoon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0B9A756D1AC4CA8C00E5B0F8 /* Debug */,

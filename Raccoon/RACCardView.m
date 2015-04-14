@@ -19,8 +19,6 @@
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
-@property (weak, nonatomic) IBOutlet UILabel *firstInfoView;
-@property (weak, nonatomic) IBOutlet UILabel *secondInfoView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingSpinner;
 @property (weak, nonatomic) IBOutlet UITextView *titleView;
 
@@ -50,7 +48,6 @@
         
         //Fill card information.
         [self loadImage];
-        [self setInfoLabels];
     }
     
     return self;
@@ -81,9 +78,7 @@
                                        [self setOverlayLabels];
                                        [self setOverlayGradient];
                                        self.overlayView.hidden = NO;
-                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *errir) {
-                                       //
-                                   }];
+                                   } failure:nil];
 }
 
 - (void)setOverlayGradient {
@@ -92,24 +87,13 @@
     CGRect gradientFrame = self.overlayView.bounds;
     gradient.frame = gradientFrame;
     UIColor *startColor = [UIColor clearColor];
-    UIColor *endColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    UIColor *endColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     gradient.colors = [NSArray arrayWithObjects:(id)[startColor CGColor], (id)[endColor CGColor], nil];
     [self.overlayView.layer insertSublayer:gradient atIndex:0];
 }
 
 - (void)setOverlayLabels {
     self.titleView.text = [self.recipe.title uppercaseString];
-}
-
-- (void)setInfoLabels {
-    self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.recipe.healthiness];
-    self.secondInfoView.text = [NSString stringWithFormat:@"%ld%@", self.recipe.preparation, NSLocalizedString(@"min", nil)];
-    
-    NSString *priceStr = @"";
-    
-    for (NSInteger i = 0; i < self.recipe.price + 1; i++) {
-        priceStr = [priceStr stringByAppendingString:@"$"];
-    }
 }
 
 @end

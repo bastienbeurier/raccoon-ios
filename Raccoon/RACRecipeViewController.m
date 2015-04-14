@@ -25,13 +25,6 @@
 @property (strong, nonatomic) UIView *imageTitleContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ingredientsContainerHeightConstraint;
-@property (weak, nonatomic) IBOutlet UILabel *firstInfoTitle;
-@property (weak, nonatomic) IBOutlet UILabel *secondInfoTitle;
-@property (weak, nonatomic) IBOutlet UILabel *thirdInfoTitle;
-@property (weak, nonatomic) IBOutlet UILabel *firstInfoView;
-@property (weak, nonatomic) IBOutlet UILabel *secondInfoView;
-@property (weak, nonatomic) IBOutlet UILabel *thirdInfoView;
-@property (weak, nonatomic) IBOutlet UIView *infoViewsContainer;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientsCategoryLabel;
 @property (weak, nonatomic) IBOutlet UIView *ingredientsContainer;
 @property (weak, nonatomic) IBOutlet UIView *ingredientContainer1;
@@ -144,7 +137,6 @@
     
     self.navBar.alpha = 0;
     
-    [self setInfoLabels];
     [self setIngredients];
     [self setRecipeSteps];
 }
@@ -157,32 +149,6 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
-}
-
-- (void)setInfoLabels {
-    self.firstInfoTitle.text = [NSLocalizedString(@"healthy", nil) uppercaseString];
-    self.secondInfoTitle.text = [NSLocalizedString(@"time", nil) uppercaseString];
-    self.thirdInfoTitle.text = [NSLocalizedString(@"price", nil) uppercaseString];
-    
-    self.firstInfoView.text = [NSString stringWithFormat:@"%ld%%", self.recipe.healthiness];
-    self.secondInfoView.text = [NSString stringWithFormat:@"%ld %@", self.recipe.preparation, NSLocalizedString(@"min", nil)];
-    
-    NSString *priceStr = @"";
-    
-    for (NSInteger i = 0; i < self.recipe.price + 1; i++) {
-        priceStr = [priceStr stringByAppendingString:@"$"];
-    }
-    
-    self.thirdInfoView.text = priceStr;
-    
-    //Set separator view height.
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - SEPARATOR_WIDTH)/2,
-                                                                     self.infoViewsContainer.frame.size.height - SEPARATOR_HEIGHT,
-                                                                     SEPARATOR_WIDTH,
-                                                                     SEPARATOR_HEIGHT)];
-    
-    separatorView.backgroundColor = [UIColor lightGrayColor];
-    [self.infoViewsContainer addSubview:separatorView];
 }
 
 - (void)setIngredients {
