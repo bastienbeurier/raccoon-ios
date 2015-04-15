@@ -133,7 +133,7 @@
     //Set recipe image.
     [self.imageView setImageWithURL:[NSURL URLWithString:self.recipe.imageUrl]];
     
-    self.titleView.text = self.recipe.title;
+    self.titleView.text = [self.recipe.title uppercaseString];
     
     self.navBar.alpha = 0;
     

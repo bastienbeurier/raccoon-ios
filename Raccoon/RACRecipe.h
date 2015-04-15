@@ -12,9 +12,6 @@
 
 @property (nonatomic) NSInteger identifier;
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic) NSInteger healthiness;
-@property (nonatomic) NSInteger preparation;
-@property (nonatomic) NSInteger price;
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSMutableArray *ingredients;
 @property (nonatomic, strong) NSMutableArray *steps;

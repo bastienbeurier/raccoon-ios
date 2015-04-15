@@ -10,9 +10,6 @@
 
 #define ID @"id"
 #define TITLE @"title"
-#define HEALTHINESS @"healthiness"
-#define PREPARATION @"preparation"
-#define PRICE @"price"
 #define IMAGE @"image_url"
 #define INGREDIENTS @"ingredients"
 #define STEPS @"steps"
@@ -47,9 +44,6 @@
     
     instance.identifier = [[raw objectForKey:ID] integerValue];
     instance.title = [raw objectForKey:TITLE];
-    instance.healthiness = [[raw objectForKey:HEALTHINESS] integerValue];
-    instance.preparation = [[raw objectForKey:PREPARATION] integerValue];
-    instance.price = [[raw objectForKey:PRICE] integerValue];
     instance.imageUrl = [raw objectForKey:IMAGE];
     
     instance.ingredients = [NSMutableArray new];

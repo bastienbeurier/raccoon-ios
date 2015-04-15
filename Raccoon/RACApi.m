@@ -51,7 +51,8 @@
     return [NSString stringWithFormat:@"api/v%@/", kApiVersion];
 }
 
-+ (void)getRecipes:(NSInteger)count
++ (void)getRecipes:(NSString *)text
+             count:(NSInteger)count
            orderBy:(NSString *)orderBy
             offset:(NSInteger)offset
            success:(void(^)(NSArray *recipes))success
@@ -63,6 +64,10 @@
     [parameters setObject:[NSNumber numberWithLong:count] forKey:@"count"];
     [parameters setObject:[NSNumber numberWithLong:offset] forKey:@"offset"];
     [parameters setObject:orderBy forKey:@"order_by"];
+    
+    if (text) {
+        [parameters setObject:text forKey:@"text"];
+    }
     
     [[RACApi sharedClient] GET:path parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
         NSDictionary *result = [JSON valueForKeyPath:@"result"];

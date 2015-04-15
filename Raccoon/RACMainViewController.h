@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RACMainViewController : UIViewController
+@interface RACMainViewController : UITableViewController
 
 
 @end

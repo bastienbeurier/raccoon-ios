@@ -13,7 +13,8 @@
 
 + (RACApi *)sharedClient;
 
-+ (void)getRecipes:(NSInteger)count
++ (void)getRecipes:(NSString *)text
+             count:(NSInteger)count
            orderBy:(NSString *)orderBy
             offset:(NSInteger)offset
            success:(void(^)(NSArray *recipes))success
