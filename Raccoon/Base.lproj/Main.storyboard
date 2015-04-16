@@ -7,6 +7,14 @@
         <mutableArray key="HappyFox-Condensed.otf">
             <string>HappyFox-Condensed</string>
             <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
+            <string>HappyFox-Condensed</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -115,16 +123,16 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INGREDIENTS_CATEGORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAp-hi-Rh5">
-                                        <rect key="frame" x="20" y="180" width="204" height="21"/>
+                                        <rect key="frame" x="20" y="180" width="167" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="h1f-7E-FxF"/>
+                                            <constraint firstAttribute="height" constant="25" id="h1f-7E-FxF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="32"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Us-zK-dl6">
-                                        <rect key="frame" x="10" y="210" width="580" height="60"/>
+                                        <rect key="frame" x="10" y="214" width="580" height="60"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvZ-1R-xaC">
                                                 <rect key="frame" x="0.0" y="0.0" width="580" height="35"/>
@@ -354,16 +362,16 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEPS_CATEGORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SC-sD-XZb">
-                                        <rect key="frame" x="20" y="300" width="149" height="21"/>
+                                        <rect key="frame" x="20" y="304" width="122" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="rTD-Qc-icw"/>
+                                            <constraint firstAttribute="height" constant="25" id="rTD-Qc-icw"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="32"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjk-wY-v1z">
-                                        <rect key="frame" x="10" y="329" width="580" height="297"/>
+                                        <rect key="frame" x="10" y="337" width="580" height="297"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBs-Ed-wVs">
                                                 <rect key="frame" x="0.0" y="0.0" width="580" height="37"/>
@@ -374,7 +382,7 @@
                                                             <constraint firstAttribute="width" constant="50" id="6eC-yp-jld"/>
                                                             <constraint firstAttribute="height" constant="37" id="GSw-3w-nRB"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="26"/>
                                                         <color key="textColor" red="0.90980392160000001" green="0.41960784309999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -411,7 +419,7 @@
                                                             <constraint firstAttribute="height" constant="37" id="p0d-iV-6j5"/>
                                                             <constraint firstAttribute="width" constant="50" id="p2P-sw-1eY"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="26"/>
                                                         <color key="textColor" red="0.90980392160000001" green="0.41960784309999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -448,7 +456,7 @@
                                                             <constraint firstAttribute="width" constant="50" id="3Lw-Ft-2c1"/>
                                                             <constraint firstAttribute="height" constant="37" id="sIe-10-buy"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="26"/>
                                                         <color key="textColor" red="0.90980392160000001" green="0.41960784309999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -485,7 +493,7 @@
                                                             <constraint firstAttribute="height" constant="37" id="gcS-bR-gB5"/>
                                                             <constraint firstAttribute="width" constant="50" id="kzb-r8-mc1"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="27"/>
                                                         <color key="textColor" red="0.90980392160000001" green="0.41960784309999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -522,7 +530,7 @@
                                                             <constraint firstAttribute="width" constant="50" id="IW5-gj-HKk"/>
                                                             <constraint firstAttribute="height" constant="37" id="Q3C-4y-lZJ"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="26"/>
                                                         <color key="textColor" red="0.90980392160000001" green="0.41960784309999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -559,7 +567,7 @@
                                                             <constraint firstAttribute="height" constant="37" id="5FD-kW-oys"/>
                                                             <constraint firstAttribute="width" constant="50" id="zv6-OG-28B"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="26"/>
                                                         <color key="textColor" red="0.90980392160000001" green="0.41960784309999999" blue="0.39607843139999999" alpha="1" colorSpace="deviceRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -695,7 +703,7 @@
                         <outlet property="ingredientLabel10" destination="rK1-p6-A10" id="30o-St-muW"/>
                         <outlet property="ingredientLabel2" destination="cge-Gj-6UE" id="ea8-tW-ScD"/>
                         <outlet property="ingredientLabel3" destination="Ipq-zw-8Cl" id="RSQ-LX-8qd"/>
-                        <outlet property="ingredientLabel4" destination="oVe-vk-ybs" id="0FF-Lp-PHJ"/>
+                        <outlet property="ingredientLabel4" destination="J66-z6-S3x" id="b5l-rj-Tnt"/>
                         <outlet property="ingredientLabel5" destination="oVe-vk-ybs" id="9Uy-3C-VdF"/>
                         <outlet property="ingredientLabel6" destination="Nva-Lz-rRq" id="yX0-Lg-Zpy"/>
                         <outlet property="ingredientLabel7" destination="12d-5g-Cce" id="KjF-Ax-TmS"/>
@@ -735,7 +743,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sOK-Fb-sHc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="ksM-xA-puo" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" hidesBarsOnSwipe="YES" id="ksM-xA-puo" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1EQ-Q5-hSj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

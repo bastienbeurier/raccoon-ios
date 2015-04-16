@@ -17,4 +17,8 @@
              action:(NSString *)action
          completion:(void(^)())completion;
 
++ (UIImage *)getCachedImage:(NSInteger)identifier;
+
++ (void)setCachedImage:(UIImage *)image forId:(NSInteger)identifier;
+
 @end

@@ -111,10 +111,33 @@
     
     //TODO BB: cache image in file system.
     
+    
     //Set cell content.
     cell.imageView.image = nil;
     [cell.imageView setImageWithURL:[NSURL URLWithString:recipe.imageUrl]];
     cell.title.text = recipe.title;
+    
+    //Get image from cache or download it.
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        UIImage *image = [RACUtils getCachedImage:recipe.identifier];
+        
+        if (image) {
+            //Image in cache.
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                cell.imageView.image = image;
+            }];
+        } else {
+            //download image
+            NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:recipe.imageUrl]];
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                cell.imageView.image = [UIImage imageWithData:imageData];
+            }];
+            
+            //Cache image.
+            [RACUtils setCachedImage:image forId:recipe.identifier];
+        }
+    }];
     
     //Shadow on title.
     cell.title.layer.shadowOpacity = 0.8;
