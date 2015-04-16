@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Raccoon. All rights reserved.
 //
 
-#import "RecipesCollectionVC.h"
+#import "RACRecipesCollectionVC.h"
 #import "RACApi.h"
 #import "RACUtils.h"
-#import "RecipeCell.h"
+#import "RACRecipeCell.h"
 #import "RACRecipe.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "RACRecipeViewController.h"
@@ -17,8 +17,9 @@
 
 #define LOADING_BATCH 100
 #define ITEM_SPACING 2
+#define STATUS_BAR_HEIGHT 22
 
-@interface RecipesCollectionVC ()
+@interface RACRecipesCollectionVC ()
 
 @property (strong, nonatomic) NSMutableArray *recipes;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
@@ -26,7 +27,7 @@
 
 @end
 
-@implementation RecipesCollectionVC
+@implementation RACRecipesCollectionVC
 
 #pragma mark - Overriden methods
 
@@ -35,12 +36,13 @@
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
-    self.recipes = [NSMutableArray new];
-    
-    UIView *statusBarView =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 22)];
+    //Fake status bar.
+    UIView *statusBarView =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, STATUS_BAR_HEIGHT)];
     statusBarView.backgroundColor = [RACGraphics red];
     [self.view addSubview:statusBarView];
     
+    //Load recipes.
+    self.recipes = [NSMutableArray new];
     [self loadRecipes:nil];
 }
 
@@ -60,11 +62,13 @@
 #pragma mark - Loading methods
 
 - (void)loadRecipes:(NSString *)text {
+    //Prepare to load new recipes.
     self.recipes = [NSMutableArray new];
     [self.collectionView reloadData];
     [self.activity startAnimating];
     self.activity.hidden = NO;
     
+    //Load recipes from server.
     [RACApi getRecipes:text count:LOADING_BATCH orderBy:@"created_at" offset:0 success:^(NSArray *recipes) {
         [self.activity stopAnimating];
         self.activity.hidden = YES;
@@ -72,7 +76,7 @@
         [self.recipes addObjectsFromArray:recipes];
         [self.collectionView reloadData];
     } failure:^{
-        //Connection problem, show alert dialog.
+        //Request problem, show alert dialog.
         [RACUtils showMessage:NSLocalizedString(@"no_connection_message", nil)
                 forController:self
                     withTitle:NSLocalizedString(@"no_connection_title", nil)
@@ -106,7 +110,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    RecipeCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
+    RACRecipeCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
     RACRecipe *recipe = self.recipes[indexPath.row];
     
     //TODO BB: cache image in file system.

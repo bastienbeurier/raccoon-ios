@@ -8,27 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		0B1F69661ADD850C003A6297 /* HappyFox-Condensed.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0B1F69651ADD850C003A6297 /* HappyFox-Condensed.otf */; };
-		0B3D2DE11AC5C74B00691808 /* RACCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE01AC5C74B00691808 /* RACCardView.xib */; };
-		0B3D2DE21AC5C74B00691808 /* RACCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE01AC5C74B00691808 /* RACCardView.xib */; };
 		0B3D2DE31AC5D11A00691808 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE61AC5D11A00691808 /* Localizable.strings */; };
 		0B3D2DE41AC5D11A00691808 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3D2DE61AC5D11A00691808 /* Localizable.strings */; };
 		0B5B0C241ADAFCB5001BBFAD /* RACApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C231ADAFCB5001BBFAD /* RACApi.m */; };
 		0B5B0C251ADAFCB5001BBFAD /* RACApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C231ADAFCB5001BBFAD /* RACApi.m */; };
 		0B5B0C281ADAFD31001BBFAD /* RACConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C271ADAFD31001BBFAD /* RACConstants.m */; };
 		0B5B0C291ADAFD31001BBFAD /* RACConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C271ADAFD31001BBFAD /* RACConstants.m */; };
-		0B6818611ADEF607004EA53A /* RecipesCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6818601ADEF607004EA53A /* RecipesCollectionVC.m */; };
-		0B6818641ADEFF3D004EA53A /* RecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6818631ADEFF3D004EA53A /* RecipeCell.m */; };
+		0B6818611ADEF607004EA53A /* RACRecipesCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6818601ADEF607004EA53A /* RACRecipesCollectionVC.m */; };
+		0B6818641ADEFF3D004EA53A /* RACRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6818631ADEFF3D004EA53A /* RACRecipeCell.m */; };
 		0B6818661ADF1C05004EA53A /* HappyFox-Condensed.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0B1F69651ADD850C003A6297 /* HappyFox-Condensed.otf */; };
 		0B9A754C1AC4CA8C00E5B0F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A754B1AC4CA8C00E5B0F8 /* main.m */; };
 		0B9A754F1AC4CA8C00E5B0F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A754E1AC4CA8C00E5B0F8 /* AppDelegate.m */; };
 		0B9A75521AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75501AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld */; };
-		0B9A75551AC4CA8C00E5B0F8 /* RACMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75541AC4CA8C00E5B0F8 /* RACMainViewController.m */; };
 		0B9A75581AC4CA8C00E5B0F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B9A75561AC4CA8C00E5B0F8 /* Main.storyboard */; };
 		0B9A755A1AC4CA8C00E5B0F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B9A75591AC4CA8C00E5B0F8 /* Images.xcassets */; };
 		0B9A755D1AC4CA8C00E5B0F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B9A755B1AC4CA8C00E5B0F8 /* LaunchScreen.xib */; };
 		0B9A75691AC4CA8C00E5B0F8 /* RaccoonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75681AC4CA8C00E5B0F8 /* RaccoonTests.m */; };
-		0B9A75761AC4CD4600E5B0F8 /* RACCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75751AC4CD4600E5B0F8 /* RACCardView.m */; };
-		0B9A75771AC4CD4600E5B0F8 /* RACCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75751AC4CD4600E5B0F8 /* RACCardView.m */; };
 		0B9A757B1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */; };
 		0B9A757C1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */; };
 		0BB74A8F1ADC4048007F4DF6 /* RACUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB74A8E1ADC4048007F4DF6 /* RACUtils.m */; };
@@ -55,32 +50,27 @@
 
 /* Begin PBXFileReference section */
 		0B1F69651ADD850C003A6297 /* HappyFox-Condensed.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HappyFox-Condensed.otf"; sourceTree = "<group>"; };
-		0B3D2DE01AC5C74B00691808 /* RACCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACCardView.xib; sourceTree = "<group>"; };
 		0B3D2DE51AC5D11A00691808 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0B5B0C221ADAFCB5001BBFAD /* RACApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACApi.h; sourceTree = "<group>"; };
 		0B5B0C231ADAFCB5001BBFAD /* RACApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACApi.m; sourceTree = "<group>"; };
 		0B5B0C261ADAFD31001BBFAD /* RACConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACConstants.h; sourceTree = "<group>"; };
 		0B5B0C271ADAFD31001BBFAD /* RACConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACConstants.m; sourceTree = "<group>"; };
-		0B68185F1ADEF607004EA53A /* RecipesCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipesCollectionVC.h; sourceTree = "<group>"; };
-		0B6818601ADEF607004EA53A /* RecipesCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipesCollectionVC.m; sourceTree = "<group>"; };
-		0B6818621ADEFF3D004EA53A /* RecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeCell.h; sourceTree = "<group>"; };
-		0B6818631ADEFF3D004EA53A /* RecipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeCell.m; sourceTree = "<group>"; };
-		0B9A75461AC4CA8C00E5B0F8 /* Hungry Raccoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hungry Raccoon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B68185F1ADEF607004EA53A /* RACRecipesCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipesCollectionVC.h; sourceTree = "<group>"; };
+		0B6818601ADEF607004EA53A /* RACRecipesCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipesCollectionVC.m; sourceTree = "<group>"; };
+		0B6818621ADEFF3D004EA53A /* RACRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipeCell.h; sourceTree = "<group>"; };
+		0B6818631ADEFF3D004EA53A /* RACRecipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipeCell.m; sourceTree = "<group>"; };
+		0B9A75461AC4CA8C00E5B0F8 /* Raccoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raccoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9A754A1AC4CA8C00E5B0F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B9A754B1AC4CA8C00E5B0F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0B9A754D1AC4CA8C00E5B0F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0B9A754E1AC4CA8C00E5B0F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0B9A75511AC4CA8C00E5B0F8 /* Raccoon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Raccoon.xcdatamodel; sourceTree = "<group>"; };
-		0B9A75531AC4CA8C00E5B0F8 /* RACMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RACMainViewController.h; sourceTree = "<group>"; };
-		0B9A75541AC4CA8C00E5B0F8 /* RACMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RACMainViewController.m; sourceTree = "<group>"; };
 		0B9A75571AC4CA8C00E5B0F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0B9A75591AC4CA8C00E5B0F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0B9A755C1AC4CA8C00E5B0F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0B9A75621AC4CA8C00E5B0F8 /* RaccoonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaccoonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9A75671AC4CA8C00E5B0F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B9A75681AC4CA8C00E5B0F8 /* RaccoonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RaccoonTests.m; sourceTree = "<group>"; };
-		0B9A75741AC4CD4600E5B0F8 /* RACCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACCardView.h; sourceTree = "<group>"; };
-		0B9A75751AC4CD4600E5B0F8 /* RACCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACCardView.m; sourceTree = "<group>"; };
 		0B9A75791AC4CDA100E5B0F8 /* RACRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipe.h; sourceTree = "<group>"; };
 		0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipe.m; sourceTree = "<group>"; };
 		0BB74A8D1ADC4048007F4DF6 /* RACUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACUtils.h; sourceTree = "<group>"; };
@@ -121,7 +111,6 @@
 			children = (
 				0B9A755B1AC4CA8C00E5B0F8 /* LaunchScreen.xib */,
 				0B9A75561AC4CA8C00E5B0F8 /* Main.storyboard */,
-				0B3D2DE01AC5C74B00691808 /* RACCardView.xib */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -164,7 +153,7 @@
 		0B9A75471AC4CA8C00E5B0F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0B9A75461AC4CA8C00E5B0F8 /* Hungry Raccoon.app */,
+				0B9A75461AC4CA8C00E5B0F8 /* Raccoon.app */,
 				0B9A75621AC4CA8C00E5B0F8 /* RaccoonTests.xctest */,
 			);
 			name = Products;
@@ -218,12 +207,10 @@
 		0B9A75721AC4CCF600E5B0F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0B9A75531AC4CA8C00E5B0F8 /* RACMainViewController.h */,
-				0B9A75541AC4CA8C00E5B0F8 /* RACMainViewController.m */,
 				0BF0537C1ACC5FFA008D5C55 /* RACRecipeViewController.h */,
 				0BF0537D1ACC5FFA008D5C55 /* RACRecipeViewController.m */,
-				0B68185F1ADEF607004EA53A /* RecipesCollectionVC.h */,
-				0B6818601ADEF607004EA53A /* RecipesCollectionVC.m */,
+				0B68185F1ADEF607004EA53A /* RACRecipesCollectionVC.h */,
+				0B6818601ADEF607004EA53A /* RACRecipesCollectionVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -231,10 +218,8 @@
 		0B9A75731AC4CD0800E5B0F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0B9A75741AC4CD4600E5B0F8 /* RACCardView.h */,
-				0B9A75751AC4CD4600E5B0F8 /* RACCardView.m */,
-				0B6818621ADEFF3D004EA53A /* RecipeCell.h */,
-				0B6818631ADEFF3D004EA53A /* RecipeCell.m */,
+				0B6818621ADEFF3D004EA53A /* RACRecipeCell.h */,
+				0B6818631ADEFF3D004EA53A /* RACRecipeCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -293,7 +278,7 @@
 			);
 			name = Raccoon;
 			productName = Raccoon;
-			productReference = 0B9A75461AC4CA8C00E5B0F8 /* Hungry Raccoon.app */;
+			productReference = 0B9A75461AC4CA8C00E5B0F8 /* Raccoon.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0B9A75611AC4CA8C00E5B0F8 /* RaccoonTests */ = {
@@ -361,7 +346,6 @@
 				0B9A75581AC4CA8C00E5B0F8 /* Main.storyboard in Resources */,
 				0B3D2DE31AC5D11A00691808 /* Localizable.strings in Resources */,
 				0B9A755D1AC4CA8C00E5B0F8 /* LaunchScreen.xib in Resources */,
-				0B3D2DE11AC5C74B00691808 /* RACCardView.xib in Resources */,
 				0B1F69661ADD850C003A6297 /* HappyFox-Condensed.otf in Resources */,
 				0B9A755A1AC4CA8C00E5B0F8 /* Images.xcassets in Resources */,
 			);
@@ -373,7 +357,6 @@
 			files = (
 				0B3D2DE41AC5D11A00691808 /* Localizable.strings in Resources */,
 				0B6818661ADF1C05004EA53A /* HappyFox-Condensed.otf in Resources */,
-				0B3D2DE21AC5C74B00691808 /* RACCardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,15 +435,13 @@
 				0BF0537E1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */,
 				0B5B0C241ADAFCB5001BBFAD /* RACApi.m in Sources */,
 				0BF053871ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */,
-				0B9A75551AC4CA8C00E5B0F8 /* RACMainViewController.m in Sources */,
-				0B6818611ADEF607004EA53A /* RecipesCollectionVC.m in Sources */,
+				0B6818611ADEF607004EA53A /* RACRecipesCollectionVC.m in Sources */,
 				0B9A75521AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld in Sources */,
-				0B9A75761AC4CD4600E5B0F8 /* RACCardView.m in Sources */,
 				0BB74A8F1ADC4048007F4DF6 /* RACUtils.m in Sources */,
 				0B9A757B1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */,
 				0B5B0C281ADAFD31001BBFAD /* RACConstants.m in Sources */,
 				0BF0538B1ACC83A0008D5C55 /* RACGraphics.m in Sources */,
-				0B6818641ADEFF3D004EA53A /* RecipeCell.m in Sources */,
+				0B6818641ADEFF3D004EA53A /* RACRecipeCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +455,6 @@
 				0BF0537F1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */,
 				0B5B0C291ADAFD31001BBFAD /* RACConstants.m in Sources */,
 				0BB74A901ADC4048007F4DF6 /* RACUtils.m in Sources */,
-				0B9A75771AC4CD4600E5B0F8 /* RACCardView.m in Sources */,
 				0B9A757C1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */,
 				0BF0538C1ACC83A0008D5C55 /* RACGraphics.m in Sources */,
 			);

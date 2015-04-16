@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface RecipesCollectionVC : UICollectionViewController <UITextFieldDelegate>
+@interface RACRecipesCollectionVC : UICollectionViewController <UITextFieldDelegate>
 
 @end

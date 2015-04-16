@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Raccoon. All rights reserved.
 //
 
-#import "RecipeCell.h"
+#import "RACRecipeCell.h"
 
-@interface RecipeCell ()
+@interface RACRecipeCell ()
 
 @end
 
-@implementation RecipeCell
+@implementation RACRecipeCell
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RecipeCell : UICollectionViewCell
+@interface RACRecipeCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *title;
