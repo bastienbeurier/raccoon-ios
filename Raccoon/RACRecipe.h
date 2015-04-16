@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface RACRecipe : NSObject
 
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSMutableArray *ingredients;
 @property (nonatomic, strong) NSMutableArray *steps;
+@property (nonatomic, strong) UIImage *image;
 
 + (NSArray *)rawsToInstances:(NSArray *)raws;
 + (RACRecipe *)rawToInstance:(NSDictionary *)raw;

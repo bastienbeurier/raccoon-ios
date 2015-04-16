@@ -9,6 +9,7 @@
 #import "RACRecipeViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "RACGraphics.h"
+#import "RACUtils.h"
 
 #define IMAGE_HEIGHT 150
 #define SEPARATOR_HEIGHT 0.5
@@ -131,7 +132,19 @@
     [self.scrollView setNeedsUpdateConstraints];
     
     //Set recipe image.
-    [self.imageView setImageWithURL:[NSURL URLWithString:self.recipe.imageUrl]];
+    if (self.recipe.image) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [UIView transitionWithView:self.imageView
+                              duration:0.2f
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                self.imageView.image = self.recipe.image;
+                            } completion:NULL];
+        }];
+    } else {
+        [self.imageView setImageWithURL:[NSURL URLWithString:self.recipe.imageUrl]];
+    }
+    
     
     self.titleView.text = [self.recipe.title uppercaseString];
     

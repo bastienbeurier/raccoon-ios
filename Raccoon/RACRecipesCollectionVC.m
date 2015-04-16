@@ -123,7 +123,13 @@
     
     //Get image from cache or download it.
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        UIImage *image = [RACUtils getCachedImage:recipe.identifier];
+        UIImage *image;
+        
+        if (recipe.image) {
+            image = recipe.image;
+        } else {
+            image = [RACUtils getCachedImage:recipe.identifier];
+        }
         
         if (image) {
             //Image in cache. Show with animation.
@@ -133,6 +139,7 @@
                                    options:UIViewAnimationOptionTransitionCrossDissolve
                                 animations:^{
                                     cell.imageView.image = image;
+                                    recipe.image = image;
                                 } completion:NULL];
             }];
         } else {
@@ -145,6 +152,7 @@
                                    options:UIViewAnimationOptionTransitionCrossDissolve
                                 animations:^{
                                     cell.imageView.image = [UIImage imageWithData:imageData];
+                                    recipe.image = image;
                                 } completion:NULL];
             }];
             
