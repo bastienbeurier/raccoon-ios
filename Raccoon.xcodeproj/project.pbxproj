@@ -14,6 +14,9 @@
 		0B5B0C251ADAFCB5001BBFAD /* RACApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C231ADAFCB5001BBFAD /* RACApi.m */; };
 		0B5B0C281ADAFD31001BBFAD /* RACConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C271ADAFD31001BBFAD /* RACConstants.m */; };
 		0B5B0C291ADAFD31001BBFAD /* RACConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5B0C271ADAFD31001BBFAD /* RACConstants.m */; };
+		0B6044E61AE04181002B03CF /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B6044E51AE04181002B03CF /* recipes.json */; };
+		0B6044E91AE041BD002B03CF /* RACTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6044E81AE041BD002B03CF /* RACTesting.m */; };
+		0B6044EB1AE045D7002B03CF /* test-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6044EA1AE045D7002B03CF /* test-image.png */; };
 		0B6818611ADEF607004EA53A /* RACRecipesCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6818601ADEF607004EA53A /* RACRecipesCollectionVC.m */; };
 		0B6818641ADEFF3D004EA53A /* RACRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6818631ADEFF3D004EA53A /* RACRecipeCell.m */; };
 		0B6818661ADF1C05004EA53A /* HappyFox-Condensed.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0B1F69651ADD850C003A6297 /* HappyFox-Condensed.otf */; };
@@ -55,6 +58,10 @@
 		0B5B0C231ADAFCB5001BBFAD /* RACApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACApi.m; sourceTree = "<group>"; };
 		0B5B0C261ADAFD31001BBFAD /* RACConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACConstants.h; sourceTree = "<group>"; };
 		0B5B0C271ADAFD31001BBFAD /* RACConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACConstants.m; sourceTree = "<group>"; };
+		0B6044E51AE04181002B03CF /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
+		0B6044E71AE041BD002B03CF /* RACTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACTesting.h; sourceTree = "<group>"; };
+		0B6044E81AE041BD002B03CF /* RACTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACTesting.m; sourceTree = "<group>"; };
+		0B6044EA1AE045D7002B03CF /* test-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test-image.png"; sourceTree = "<group>"; };
 		0B68185F1ADEF607004EA53A /* RACRecipesCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipesCollectionVC.h; sourceTree = "<group>"; };
 		0B6818601ADEF607004EA53A /* RACRecipesCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipesCollectionVC.m; sourceTree = "<group>"; };
 		0B6818621ADEFF3D004EA53A /* RACRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipeCell.h; sourceTree = "<group>"; };
@@ -199,7 +206,11 @@
 		0B9A75661AC4CA8C00E5B0F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0B6044EA1AE045D7002B03CF /* test-image.png */,
+				0B6044E51AE04181002B03CF /* recipes.json */,
 				0B9A75671AC4CA8C00E5B0F8 /* Info.plist */,
+				0B6044E71AE041BD002B03CF /* RACTesting.h */,
+				0B6044E81AE041BD002B03CF /* RACTesting.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -356,6 +367,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B3D2DE41AC5D11A00691808 /* Localizable.strings in Resources */,
+				0B6044EB1AE045D7002B03CF /* test-image.png in Resources */,
+				0B6044E61AE04181002B03CF /* recipes.json in Resources */,
 				0B6818661ADF1C05004EA53A /* HappyFox-Condensed.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B6044E91AE041BD002B03CF /* RACTesting.m in Sources */,
 				0B5B0C251ADAFCB5001BBFAD /* RACApi.m in Sources */,
 				0BF053881ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */,
 				0B9A75691AC4CA8C00E5B0F8 /* RaccoonTests.m in Sources */,

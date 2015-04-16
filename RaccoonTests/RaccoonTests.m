@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "RACTesting.h"
+#import "RACRecipe.h"
+#import "RACUtils.h"
 
 @interface RaccoonTests : XCTestCase
 
@@ -23,15 +26,32 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testImageCaching {
+    UIImage *image = [RACTesting pngFromFile:@"test-image"];
+    NSInteger identifier = -1;
+    [RACUtils setCachedImage:image forId:identifier];
+    
+    XCTAssert([RACUtils getCachedImage:identifier], @"Pass");
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
+- (void)testRecipesDeserialization {
+    id JSON = [RACTesting jsonFromFileNamed:@"recipes"];
+    NSDictionary *result = [JSON valueForKeyPath:@"result"];
+    NSArray *rawRecipes = [result objectForKey:@"recipes"];
+    NSArray *recipes = [RACRecipe rawsToInstances:rawRecipes];
+    
+    XCTAssert([recipes count] == 8, @"Pass");
+}
+
+- (void)testRecipesDeserializationPerformance {
     [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+        id JSON = [RACTesting jsonFromFileNamed:@"recipes"];
+        
+        NSDictionary *result = [JSON valueForKeyPath:@"result"];
+        
+        NSArray *rawRecipes = [result objectForKey:@"recipes"];
+        
+        [RACRecipe rawsToInstances:rawRecipes];
     }];
 }
 
