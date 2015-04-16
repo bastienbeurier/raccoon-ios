@@ -122,16 +122,26 @@
         UIImage *image = [RACUtils getCachedImage:recipe.identifier];
         
         if (image) {
-            //Image in cache.
+            //Image in cache. Show with animation.
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                cell.imageView.image = image;
+                [UIView transitionWithView:cell.imageView
+                                  duration:0.2f
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:^{
+                                    cell.imageView.image = image;
+                                } completion:NULL];
             }];
         } else {
             //download image
             NSData* imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:recipe.imageUrl]];
             
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                cell.imageView.image = [UIImage imageWithData:imageData];
+                [UIView transitionWithView:cell.imageView
+                                  duration:0.2f
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:^{
+                                    cell.imageView.image = [UIImage imageWithData:imageData];
+                                } completion:NULL];
             }];
             
             //Cache image.
