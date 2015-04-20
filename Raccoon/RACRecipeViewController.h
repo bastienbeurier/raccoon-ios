@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RACRecipe.h"
+#import "Recipe.h"
 
 @interface RACRecipeViewController : UIViewController <UIScrollViewDelegate>
 
-@property (strong, nonatomic) RACRecipe *recipe;
+@property (strong, nonatomic) Recipe *recipe;
 
 @end

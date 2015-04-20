@@ -13,6 +13,6 @@
 
 + (id)jsonFromFileNamed:(NSString *)fileName;
 
-+ (UIImage *)pngFromFile:(NSString *)fileName;
++ (NSData *)imageDataFromFile:(NSString *)fileName;
 
 @end

@@ -75,7 +75,7 @@
         NSArray *rawRecipes = [result objectForKey:@"recipes"];
         
         if (success) {
-            success([RACRecipe rawsToInstances:rawRecipes]);
+            success(rawRecipes);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {

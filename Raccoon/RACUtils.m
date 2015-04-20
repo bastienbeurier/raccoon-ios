@@ -28,23 +28,27 @@
     [controller presentViewController:alertController animated:YES completion:nil];
 }
 
-+ (UIImage *)getCachedImage:(NSInteger)identifier {
++ (UIImage *)getCachedImage:(NSNumber *)identifier {
     NSString *cachedImagesPath = [RACUtils getImagesDirectoryPath];
-    NSString *newImagePath = [cachedImagesPath stringByAppendingString:[NSString stringWithFormat:@"%ld", identifier]];
+    NSString *imagePath = [cachedImagesPath stringByAppendingString:[NSString stringWithFormat:@"%@", identifier]];
     
     NSFileManager *fileManager = [[NSFileManager alloc] init];
+    UIImage *image = nil;
     
     //Image has been cached.
-    if ([fileManager isReadableFileAtPath:newImagePath]) {
-        NSFileHandle* handle = [NSFileHandle fileHandleForReadingAtPath:newImagePath];
-        return [UIImage imageWithData:[handle readDataToEndOfFile]];
+    if ([fileManager isReadableFileAtPath:imagePath]) {
+        NSFileHandle* handle = [NSFileHandle fileHandleForReadingAtPath:imagePath];
+        image = [UIImage imageWithData:[handle readDataToEndOfFile]];
     }
-    
-    //Image has not been cached yet.
-    return nil;
+
+    return image;
 }
 
-+ (void)setCachedImage:(UIImage *)image forId:(NSInteger)identifier {
++ (void)setCachedImage:(NSData *)imageData forId:(NSNumber *)identifier {
+    if (!imageData) {
+        return;
+    }
+    
     NSString *cachedImagesPath = [RACUtils getImagesDirectoryPath];
     
     NSFileManager *fileManager = [[NSFileManager alloc] init];
@@ -59,13 +63,49 @@
         }
     }
     
-    NSString *newImagePath = [cachedImagesPath stringByAppendingString:[NSString stringWithFormat:@"%ld", identifier]];
-    [fileManager createFileAtPath:newImagePath contents:UIImagePNGRepresentation(image) attributes:nil];
+    NSString *newImagePath = [cachedImagesPath stringByAppendingString:[NSString stringWithFormat:@"%@", identifier]];
+    [fileManager createFileAtPath:newImagePath contents:imageData attributes:nil];
 }
 
 + (NSString *)getImagesDirectoryPath {
     NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    return [cachesPath stringByAppendingString:@"RaccoonImages"];
+    return [cachesPath stringByAppendingString:@"/RaccoonImages/"];
+}
+
++ (NSURL *)getDocumentDirectoryPath {
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSURL *url = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
+    return [url URLByAppendingPathComponent:@"Model"];
+}
+
++ (void)getManagedObjectContextSuccess:(void(^)(NSManagedObjectContext *))successBlock failure:(void(^)(void))failureBlock {
+    NSURL *url = [RACUtils getDocumentDirectoryPath];
+    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:url];
+    if ([[[NSFileManager alloc] init] fileExistsAtPath:[url path]]) {
+        [document openWithCompletionHandler:^(BOOL success) {
+            if (success) {
+                if (document.documentState == UIDocumentStateNormal) {
+                    successBlock(document.managedObjectContext);
+                } else {
+                    failureBlock();
+                }
+            } else {
+                failureBlock();
+            }
+        }];
+    } else {
+        [document saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+            if (success) {
+                if (document.documentState == UIDocumentStateNormal) {
+                    successBlock(document.managedObjectContext);
+                } else {
+                    failureBlock();
+                }
+            } else {
+                failureBlock();
+            }
+        }];
+    }
 }
 
 @end

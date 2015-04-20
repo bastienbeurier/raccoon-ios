@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface RACRecipesCollectionVC : UICollectionViewController <UITextFieldDelegate>
+@interface RACRecipesCollectionVC : UICollectionViewController <UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 
 @end

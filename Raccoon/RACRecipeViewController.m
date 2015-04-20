@@ -10,6 +10,8 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "RACGraphics.h"
 #import "RACUtils.h"
+#import "Ingredient.h"
+#import "Step.h"
 
 #define IMAGE_HEIGHT 150
 #define SEPARATOR_HEIGHT 0.5
@@ -72,6 +74,8 @@
 @property (strong, nonatomic) NSArray *stepContainers;
 @property (strong, nonatomic) NSArray *stepNbrs;
 @property (strong, nonatomic) NSArray *stepDescs;
+@property (strong, nonatomic) NSMutableArray *ingredients;
+@property (strong, nonatomic) NSMutableArray *steps;
 
 @end
 
@@ -132,23 +136,34 @@
     [self.scrollView setNeedsUpdateConstraints];
     
     //Set recipe image.
-    if (self.recipe.image) {
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [UIView transitionWithView:self.imageView
-                              duration:0.2f
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:^{
-                                self.imageView.image = self.recipe.image;
-                            } completion:NULL];
-        }];
+    UIImage *image = [RACUtils getCachedImage:self.recipe.identifier];
+    
+    if (image) {
+        //Image in cache. Show with animation.
+        [UIView transitionWithView:self.imageView
+                          duration:0.2f
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            self.imageView.image = image;
+                        } completion:NULL];
     } else {
+        //download image
         [self.imageView setImageWithURL:[NSURL URLWithString:self.recipe.imageUrl]];
     }
-    
-    
+
     self.titleView.text = [self.recipe.title uppercaseString];
     
     self.navBar.alpha = 0;
+    
+    self.ingredients = [NSMutableArray new];
+    for (Ingredient *ingredient in self.recipe.ingredients) {
+        [self.ingredients addObject:ingredient.desc];
+    }
+    
+    self.steps = [NSMutableArray new];
+    for (Step *step in self.recipe.steps) {
+        [self.steps addObject:step.desc];
+    }
     
     [self setIngredients];
     [self setRecipeSteps];
@@ -170,7 +185,7 @@
     for (NSInteger i = 0; i < [self.ingredientContainers count]; i++) {
         if (i < [self.recipe.ingredients count]) {
             //Set ingredient text.
-            ((UILabel *) [self.ingredientLabels objectAtIndex:i]).text = [self.recipe.ingredients objectAtIndex:i];
+            ((UILabel *) [self.ingredientLabels objectAtIndex:i]).text = [self.ingredients objectAtIndex:i];
         } else {
             //Hide ingredient container.
             ((UIView *) [self.ingredientContainers objectAtIndex:i]).hidden = YES;
@@ -196,7 +211,7 @@
             ((UILabel *) [self.stepNbrs objectAtIndex:i]).text = [NSString stringWithFormat:@"%ld/%ld", i + 1, [self.recipe.steps count]];
             
             //Set description text.
-            ((UITextView *) [self.stepDescs objectAtIndex:i]).text = [self.recipe.steps objectAtIndex:i];
+            ((UITextView *) [self.stepDescs objectAtIndex:i]).text = [self.steps objectAtIndex:i];
             
             //Corder radius
             ((UIView *) [self.stepContainers objectAtIndex:i]).clipsToBounds = YES;

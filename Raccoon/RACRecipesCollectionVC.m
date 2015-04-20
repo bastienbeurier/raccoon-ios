@@ -14,6 +14,8 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "RACRecipeViewController.h"
 #import "RACGraphics.h"
+#import "Recipe+Utils.h"
+#import "AppDelegate.h"
 
 #define LOADING_BATCH 100
 #define ITEM_SPACING 2
@@ -21,9 +23,10 @@
 
 @interface RACRecipesCollectionVC ()
 
-@property (strong, nonatomic) NSMutableArray *recipes;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
+@property (strong, nonatomic) NSManagedObjectContext *context;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property NSMutableArray *itemChanges;
 
 @end
 
@@ -41,9 +44,15 @@
     statusBarView.backgroundColor = [RACGraphics red];
     [self.view addSubview:statusBarView];
     
-    //Load recipes.
-    self.recipes = [NSMutableArray new];
-    [self loadRecipes:nil];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    
+    [[self fetchedResultsController] performFetch:NULL];
+    [self loadServerRecipes];
+}
+
+- (void)viewDidUnload {
+    self.fetchedResultsController = nil;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -61,36 +70,51 @@
 
 #pragma mark - Loading methods
 
-- (void)loadRecipes:(NSString *)text {
-    //Prepare to load new recipes.
-    self.recipes = [NSMutableArray new];
-    [self.collectionView reloadData];
-    [self.activity startAnimating];
-    self.activity.hidden = NO;
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
     
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recipe"];
+    request.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"identifier" ascending:YES]];
+    request.fetchBatchSize = 20;
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                    managedObjectContext:self.context
+                                                                      sectionNameKeyPath:nil
+                                                                               cacheName:nil];
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}
+
+- (void)loadServerRecipes {
     //Load recipes from server.
-    [RACApi getRecipes:text count:LOADING_BATCH orderBy:@"created_at" offset:0 success:^(NSArray *recipes) {
-        [self.activity stopAnimating];
-        self.activity.hidden = YES;
-        
-        [self.recipes addObjectsFromArray:recipes];
-        [self.collectionView reloadData];
+    [RACApi getRecipes:nil count:LOADING_BATCH orderBy:@"created_at" offset:0 success:^(NSArray *serverRecipes) {
+        NSArray *localRecipes = [Recipe getLocalRecipesWithContext:self.context];
+        [Recipe syncLocalRecipes:localRecipes withServerRecipes:serverRecipes forContext:self.context];
     } failure:^{
-        //Request problem, show alert dialog.
-        [RACUtils showMessage:NSLocalizedString(@"no_connection_message", nil)
-                forController:self
-                    withTitle:NSLocalizedString(@"no_connection_title", nil)
-                       action:NSLocalizedString(@"OK", nil)
-                   completion:^{
-                       [self loadRecipes:self.searchField.text];
-                   }];
+        BOOL noLocalData = [[self.fetchedResultsController sections] count] == 0 ||
+        [(id <NSFetchedResultsSectionInfo>) [[self.fetchedResultsController sections] objectAtIndex:0] numberOfObjects] == 0;
+
+        //If no local data, show alert dialog.
+        if (noLocalData) {
+            [RACUtils showMessage:NSLocalizedString(@"no_connection_message", nil)
+                    forController:self
+                        withTitle:NSLocalizedString(@"no_connection_title", nil)
+                           action:NSLocalizedString(@"OK", nil)
+                       completion:^{
+                           [self loadServerRecipes];
+                       }];
+        }
     }];
 }
 
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    [self loadRecipes:textField.text];
+    //TODO: not yet implemented.
+    [self loadServerRecipes];
     [textField resignFirstResponder];
     return YES;
 }
@@ -98,23 +122,21 @@
 #pragma mark - UICollectionView Datasource
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    if (section == 0) {
-        return [self.recipes count];
-    } else {
-        return 0;
+    if ([[self.fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
     }
+    
+    return 0;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    return 1;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     RACRecipeCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"RecipeCell" forIndexPath:indexPath];
-    RACRecipe *recipe = self.recipes[indexPath.row];
-    
-    //TODO BB: cache image in file system.
-    
+    Recipe *recipe = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     //Set cell content.
     cell.imageView.image = nil;
@@ -123,13 +145,7 @@
     
     //Get image from cache or download it.
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
-        UIImage *image;
-        
-        if (recipe.image) {
-            image = recipe.image;
-        } else {
-            image = [RACUtils getCachedImage:recipe.identifier];
-        }
+        UIImage *image = [RACUtils getCachedImage:recipe.identifier];
         
         if (image) {
             //Image in cache. Show with animation.
@@ -139,7 +155,6 @@
                                    options:UIViewAnimationOptionTransitionCrossDissolve
                                 animations:^{
                                     cell.imageView.image = image;
-                                    recipe.image = image;
                                 } completion:NULL];
             }];
         } else {
@@ -152,12 +167,13 @@
                                    options:UIViewAnimationOptionTransitionCrossDissolve
                                 animations:^{
                                     cell.imageView.image = [UIImage imageWithData:imageData];
-                                    recipe.image = image;
                                 } completion:NULL];
             }];
             
             //Cache image.
-            [RACUtils setCachedImage:image forId:recipe.identifier];
+            if (imageData) {
+                [RACUtils setCachedImage:imageData forId:recipe.identifier];
+            }
         }
     }];
     
@@ -170,11 +186,67 @@
     return cell;
 }
 
+#pragma mark - NSFetchedResultsController Delegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    self.itemChanges = [[NSMutableArray alloc] init];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            change[@(type)] = newIndexPath;
+            break;
+        case NSFetchedResultsChangeDelete:
+            change[@(type)] = indexPath;
+            break;
+        case NSFetchedResultsChangeUpdate:
+            change[@(type)] = indexPath;
+            break;
+        case NSFetchedResultsChangeMove:
+            change[@(type)] = @[indexPath, newIndexPath];
+            break;
+    }
+    [self.itemChanges addObject:change];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.collectionView performBatchUpdates:^{
+        for (NSDictionary *change in self.itemChanges) {
+            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                switch(type) {
+                    case NSFetchedResultsChangeInsert:
+                        [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeDelete:
+                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeUpdate:
+                        [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeMove:
+                        [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                        break;
+                }
+            }];
+        }
+    } completion:^(BOOL finished) {
+        self.itemChanges = nil;
+    }];
+}
+
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"Recipe Segue" sender:self.recipes[indexPath.row]];
+    [self performSegueWithIdentifier:@"Recipe Segue" sender:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {

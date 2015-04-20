@@ -1,7 +1,10 @@
+"cancel" = "cancel";
 "ingredients" = "ingredients";
 "OK" = "OK";
+"retry" = "retry";
 "steps" = "steps";
 "time" = "time";
+
 
 //MainViewController
 

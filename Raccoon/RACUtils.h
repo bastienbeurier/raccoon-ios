@@ -17,8 +17,10 @@
              action:(NSString *)action
          completion:(void(^)())completion;
 
-+ (UIImage *)getCachedImage:(NSInteger)identifier;
++ (UIImage *)getCachedImage:(NSNumber *)identifier;
 
-+ (void)setCachedImage:(UIImage *)image forId:(NSInteger)identifier;
++ (void)setCachedImage:(NSData *)imageData forId:(NSNumber *)identifier;
+
++ (void)getManagedObjectContextSuccess:(void(^)(NSManagedObjectContext *))successBlock failure:(void(^)(void))failureBlock;
 
 @end

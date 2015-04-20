@@ -23,14 +23,12 @@
     return json;
 }
 
-+ (UIImage *)pngFromFile:(NSString *)fileName
++ (NSData *)imageDataFromFile:(NSString *)fileName
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSString *resource = [bundle pathForResource:fileName ofType:@"png"];
     
-    NSData *imageData = [NSData dataWithContentsOfFile:resource];
-    
-    return [UIImage imageWithData:imageData];
+    return [NSData dataWithContentsOfFile:resource];
 }
 
 @end

@@ -27,11 +27,23 @@
 }
 
 - (void)testImageCaching {
-    UIImage *image = [RACTesting pngFromFile:@"test-image"];
-    NSInteger identifier = -1;
-    [RACUtils setCachedImage:image forId:identifier];
+    NSData *imageData = [RACTesting imageDataFromFile:@"test-image"];
+    NSNumber *identifier = @-1;
+    [RACUtils setCachedImage:imageData forId:identifier];
+    UIImage *image = [RACUtils getCachedImage:identifier];
+    [RACUtils setCachedImage:imageData forId:identifier];
+    image = [RACUtils getCachedImage:identifier];
     
-    XCTAssert([RACUtils getCachedImage:identifier], @"Pass");
+    XCTAssert(image != nil, @"Pass");
+}
+
+- (void)testImageCachingPerformance {
+    [self measureBlock:^{
+        NSData *imageData = [RACTesting imageDataFromFile:@"test-image"];
+        NSNumber *identifier = @-1;
+        [RACUtils setCachedImage:imageData forId:identifier];
+        [RACUtils getCachedImage:identifier];
+    }];
 }
 
 - (void)testRecipesDeserialization {

@@ -31,6 +31,16 @@
 		0B9A757C1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */; };
 		0BB74A8F1ADC4048007F4DF6 /* RACUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB74A8E1ADC4048007F4DF6 /* RACUtils.m */; };
 		0BB74A901ADC4048007F4DF6 /* RACUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB74A8E1ADC4048007F4DF6 /* RACUtils.m */; };
+		0BD0D2921AE49EE60090AF67 /* Step.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0D2911AE49EE60090AF67 /* Step.m */; };
+		0BD0D2931AE49EE60090AF67 /* Step.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0D2911AE49EE60090AF67 /* Step.m */; };
+		0BD0D2961AE49EE70090AF67 /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0D2951AE49EE70090AF67 /* Recipe.m */; };
+		0BD0D2971AE49EE70090AF67 /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0D2951AE49EE70090AF67 /* Recipe.m */; };
+		0BD0D29A1AE49EE70090AF67 /* Ingredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0D2991AE49EE70090AF67 /* Ingredient.m */; };
+		0BD0D29B1AE49EE70090AF67 /* Ingredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0D2991AE49EE70090AF67 /* Ingredient.m */; };
+		0BD0D29C1AE49F4C0090AF67 /* Raccoon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A75501AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld */; };
+		0BDA12D01AE1918E00AA8BDD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDA12CF1AE1918E00AA8BDD /* CoreData.framework */; };
+		0BDA12EF1AE1CFC800AA8BDD /* Recipe+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA12EE1AE1CFC800AA8BDD /* Recipe+Utils.m */; };
+		0BDA12F01AE1CFC800AA8BDD /* Recipe+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA12EE1AE1CFC800AA8BDD /* Recipe+Utils.m */; };
 		0BF0537E1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF0537D1ACC5FFA008D5C55 /* RACRecipeViewController.m */; };
 		0BF0537F1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF0537D1ACC5FFA008D5C55 /* RACRecipeViewController.m */; };
 		0BF053871ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF053861ACC64E1008D5C55 /* CrossDissolveSegue.m */; };
@@ -82,6 +92,15 @@
 		0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipe.m; sourceTree = "<group>"; };
 		0BB74A8D1ADC4048007F4DF6 /* RACUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACUtils.h; sourceTree = "<group>"; };
 		0BB74A8E1ADC4048007F4DF6 /* RACUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACUtils.m; sourceTree = "<group>"; };
+		0BD0D2901AE49EE60090AF67 /* Step.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Step.h; sourceTree = "<group>"; };
+		0BD0D2911AE49EE60090AF67 /* Step.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Step.m; sourceTree = "<group>"; };
+		0BD0D2941AE49EE70090AF67 /* Recipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipe.h; sourceTree = "<group>"; };
+		0BD0D2951AE49EE70090AF67 /* Recipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipe.m; sourceTree = "<group>"; };
+		0BD0D2981AE49EE70090AF67 /* Ingredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredient.h; sourceTree = "<group>"; };
+		0BD0D2991AE49EE70090AF67 /* Ingredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredient.m; sourceTree = "<group>"; };
+		0BDA12CF1AE1918E00AA8BDD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0BDA12ED1AE1CFC800AA8BDD /* Recipe+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Recipe+Utils.h"; sourceTree = "<group>"; };
+		0BDA12EE1AE1CFC800AA8BDD /* Recipe+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Recipe+Utils.m"; sourceTree = "<group>"; };
 		0BF0537C1ACC5FFA008D5C55 /* RACRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACRecipeViewController.h; sourceTree = "<group>"; };
 		0BF0537D1ACC5FFA008D5C55 /* RACRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACRecipeViewController.m; sourceTree = "<group>"; };
 		0BF053851ACC64E1008D5C55 /* CrossDissolveSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossDissolveSegue.h; sourceTree = "<group>"; };
@@ -98,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BDA12D01AE1918E00AA8BDD /* CoreData.framework in Frameworks */,
 				B863782B86310837CADA639C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,8 +258,16 @@
 		0B9A75781AC4CD7F00E5B0F8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0BD0D2981AE49EE70090AF67 /* Ingredient.h */,
+				0BD0D2991AE49EE70090AF67 /* Ingredient.m */,
+				0BD0D2941AE49EE70090AF67 /* Recipe.h */,
+				0BD0D2951AE49EE70090AF67 /* Recipe.m */,
+				0BD0D2901AE49EE60090AF67 /* Step.h */,
+				0BD0D2911AE49EE60090AF67 /* Step.m */,
 				0B9A75791AC4CDA100E5B0F8 /* RACRecipe.h */,
 				0B9A757A1AC4CDA100E5B0F8 /* RACRecipe.m */,
+				0BDA12ED1AE1CFC800AA8BDD /* Recipe+Utils.h */,
+				0BDA12EE1AE1CFC800AA8BDD /* Recipe+Utils.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -265,6 +293,7 @@
 		631D79E572C6586439B76583 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0BDA12CF1AE1918E00AA8BDD /* CoreData.framework */,
 				5C07515E2B864E71FCA482F1 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -443,10 +472,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD0D29A1AE49EE70090AF67 /* Ingredient.m in Sources */,
 				0B9A754F1AC4CA8C00E5B0F8 /* AppDelegate.m in Sources */,
+				0BD0D2961AE49EE70090AF67 /* Recipe.m in Sources */,
 				0B9A754C1AC4CA8C00E5B0F8 /* main.m in Sources */,
+				0BDA12EF1AE1CFC800AA8BDD /* Recipe+Utils.m in Sources */,
 				0BF0537E1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */,
 				0B5B0C241ADAFCB5001BBFAD /* RACApi.m in Sources */,
+				0BD0D2921AE49EE60090AF67 /* Step.m in Sources */,
 				0BF053871ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */,
 				0B6818611ADEF607004EA53A /* RACRecipesCollectionVC.m in Sources */,
 				0B9A75521AC4CA8C00E5B0F8 /* Raccoon.xcdatamodeld in Sources */,
@@ -466,8 +499,13 @@
 				0B5B0C251ADAFCB5001BBFAD /* RACApi.m in Sources */,
 				0BF053881ACC64E1008D5C55 /* CrossDissolveSegue.m in Sources */,
 				0B9A75691AC4CA8C00E5B0F8 /* RaccoonTests.m in Sources */,
+				0BD0D2931AE49EE60090AF67 /* Step.m in Sources */,
 				0BF0537F1ACC5FFA008D5C55 /* RACRecipeViewController.m in Sources */,
 				0B5B0C291ADAFD31001BBFAD /* RACConstants.m in Sources */,
+				0BD0D29C1AE49F4C0090AF67 /* Raccoon.xcdatamodeld in Sources */,
+				0BD0D2971AE49EE70090AF67 /* Recipe.m in Sources */,
+				0BD0D29B1AE49EE70090AF67 /* Ingredient.m in Sources */,
+				0BDA12F01AE1CFC800AA8BDD /* Recipe+Utils.m in Sources */,
 				0BB74A901ADC4048007F4DF6 /* RACUtils.m in Sources */,
 				0B9A757C1AC4CDA100E5B0F8 /* RACRecipe.m in Sources */,
 				0BF0538C1ACC83A0008D5C55 /* RACGraphics.m in Sources */,

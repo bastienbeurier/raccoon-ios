@@ -32,10 +32,6 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="jbQ-Ab-E2f">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCell" id="jdw-Zb-Waz" customClass="RACRecipeCell">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -47,7 +43,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4iJ-Sf-m6q">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         </imageView>
-                                        <textView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="RECIPE TITLE" translatesAutoresizingMaskIntoConstraints="NO" id="fS4-u2-7H2">
+                                        <textView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="RECIPE TITLE" translatesAutoresizingMaskIntoConstraints="NO" id="fS4-u2-7H2">
                                             <rect key="frame" x="10" y="143" width="180" height="57"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="HappyFox-Condensed" family="Happy Fox" pointSize="34"/>
@@ -91,7 +87,6 @@
                         </textField>
                     </navigationItem>
                     <connections>
-                        <outlet property="activity" destination="jbQ-Ab-E2f" id="cUg-aa-8Rv"/>
                         <outlet property="searchField" destination="Am6-uO-RKD" id="Fa3-7v-0It"/>
                         <segue destination="jJ7-Ms-B07" kind="custom" identifier="Recipe Segue" customClass="CrossDissolveSegue" id="JIj-7x-9XA"/>
                     </connections>
@@ -122,7 +117,7 @@
                                             <constraint firstAttribute="height" constant="150" id="GFE-gM-LI6"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="INGREDIENTS_CATEGORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAp-hi-Rh5">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INGREDIENTS_CATEGORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAp-hi-Rh5">
                                         <rect key="frame" x="20" y="180" width="167" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="h1f-7E-FxF"/>
@@ -361,7 +356,7 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STEPS_CATEGORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SC-sD-XZb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEPS_CATEGORY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SC-sD-XZb">
                                         <rect key="frame" x="20" y="304" width="122" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="rTD-Qc-icw"/>
@@ -743,7 +738,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sOK-Fb-sHc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" hidesBarsOnSwipe="YES" id="ksM-xA-puo" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ksM-xA-puo" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1EQ-Q5-hSj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
