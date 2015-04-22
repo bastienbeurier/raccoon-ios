@@ -12,6 +12,6 @@
 @interface Recipe (Utils)
 
 + (NSArray *)getLocalRecipesWithContext:(NSManagedObjectContext *)context;
-+ (NSArray *)syncLocalRecipes:(NSArray *)localRecipes withServerRecipes:(NSArray *)serverRecipes forContext:(NSManagedObjectContext *)context;
++ (void)syncLocalRecipesWithServerRecipes:(NSArray *)serverRecipes forContext:(NSManagedObjectContext *)context;
 
 @end

@@ -55,15 +55,15 @@
     return recipes;
 }
 
-+ (NSArray *)syncLocalRecipes:(NSArray *)localRecipes withServerRecipes:(NSArray *)serverRecipes forContext:(NSManagedObjectContext *)context {
-    NSError *error;
++ (void)syncLocalRecipesWithServerRecipes:(NSArray *)serverRecipes forContext:(NSManagedObjectContext *)context {
+    NSArray *localRecipes = [Recipe getLocalRecipesWithContext:context];
     
     NSMutableSet *serverIds = [NSMutableSet new];
     NSMutableSet *localIds = [NSMutableSet new];
     
     //Put server recipe identifiers in set to check for membership.
     for (NSDictionary *rawRecipe in serverRecipes) {
-        [serverIds addObject:[rawRecipe objectForKey:@"id"]];
+        [serverIds addObject:[NSString stringWithFormat:@"%@", [rawRecipe objectForKey:@"id"]]];
     }
     
     //Put local recipe identifiers in set to check for membership.
@@ -73,7 +73,7 @@
     
     //Add recipes coming from server.
     for (NSDictionary *rawRecipe in serverRecipes) {
-        if (![localIds containsObject:[rawRecipe objectForKey:@"id"]]) {
+        if (![localIds containsObject:[NSString stringWithFormat:@"%@", [rawRecipe objectForKey:@"id"]]]) {
             [Recipe insertNewRecipeWithRawData:rawRecipe context:context];
         }
     }
@@ -84,9 +84,6 @@
             [context deleteObject:recipe];
         }
     }
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recipe"];
-    return [context executeFetchRequest:request error:&error];
 }
 
 @end

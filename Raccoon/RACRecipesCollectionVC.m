@@ -76,7 +76,7 @@
     }
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Recipe"];
-    request.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"identifier" ascending:YES]];
+    request.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"identifier" ascending:NO]];
     request.fetchBatchSize = 20;
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
@@ -91,8 +91,7 @@
 - (void)loadServerRecipes {
     //Load recipes from server.
     [RACApi getRecipes:nil count:LOADING_BATCH orderBy:@"created_at" offset:0 success:^(NSArray *serverRecipes) {
-        NSArray *localRecipes = [Recipe getLocalRecipesWithContext:self.context];
-        [Recipe syncLocalRecipes:localRecipes withServerRecipes:serverRecipes forContext:self.context];
+        [Recipe syncLocalRecipesWithServerRecipes:serverRecipes forContext:self.context];
     } failure:^{
         BOOL noLocalData = [[self.fetchedResultsController sections] count] == 0 ||
         [(id <NSFetchedResultsSectionInfo>) [[self.fetchedResultsController sections] objectAtIndex:0] numberOfObjects] == 0;
